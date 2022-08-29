@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>React 16上的合成事件</title>
+</head>
+<body>
+  <div id="root">
+    root
+    <div id="parent">
+      父亲
+      <div id="child"> 子
+        <div>孙子</div>
+      </div>
+    </div>
+  </div>
+</body>
+
+<script>
+  let parentDom =  document.getElementById('parent')
+  let child =  document.getElementById('child')
+
+  // onClick事件 【react合成事件模拟  16版本】
+  function dispatchEvent(event) {
+    // executeDispatch函数就是将事件对应的dom元素绑定到了currentTarget上，这样我们通过e.currentTarget就可以找到绑定事件的原生dom元素。
+    const paths = []
+    let current = event.target;
+    while(current) {
+      paths.push(current)
+      current = current.parentNode;
+    }
+    for(let i = paths.length - 1; i >= 0; i--) {
+      let handler = paths[i].onClickCapture
+      handler&& handler(event)
+    }
+    for(let i = 0; i < paths.length; i++) {
+      let handler = paths[i].onClick
+      handler&&handler(event)
+    }
+  }
+
+  parentDom.onClick = function() {
+    console.log('React parent 点击')
+  }
+  child.onClick = function(e) {
+    console.log('current', e.currentTarget)
+    console.log('target', e.target)
+    setTimeout(()=>{
+      console.log(e)
+      console.log('currentTimeout', e.currentTarget)
+    }, 1000)
+    console.log('React child 点击')
+  }
+  parentDom.onClickCapture = function() {
+    console.log('React parent 捕获')
+  }
+
+  child.onClickCapture = function() {
+    console.log('React child 捕获')
+  }
+
+  document.addEventListener('click', dispatchEvent)
+
+
+
+// 原生事件
+  parentDom.addEventListener('click', function(){
+    console.log('parent 被点击 ');
+  })
+
+  child.addEventListener('click', function(){
+    console.log('child 被点击');
+  })
+  document.addEventListener('click', function(){
+    console.log('document 被点击');
+  })
+
+  parentDom.addEventListener('click', function(){
+    console.log('parent 被点击 捕获');
+  }, true)
+
+  child.addEventListener('click', function(){
+    console.log('child 被点击 捕获');
+  }, true)
+  document.addEventListener('click', function(){
+    console.log('document 被点击 捕获');
+  }, true)
+
+
+// SyntheticEvent.html:   document 被点击 捕获
+// SyntheticEvent.html:72 parent 被点击 捕获
+// SyntheticEvent.html:76 child 被点击 捕获
+// SyntheticEvent.html:65 child 被点击
+// SyntheticEvent.html:61 parent 被点击 
+
+ 
+// SyntheticEvent.html:48 React parent 捕获
+// SyntheticEvent.html:52 React child 捕获
+// SyntheticEvent.html:45 React child 点击
+// SyntheticEvent.html:42 React parent 点击
+// document.addEventListener('click', dispatchEvent) 先注册 所以react先执行； document 被点击后执行
+// SyntheticEvent.html:68 document 被点击
+
+// 总结：先： 原生事件的捕获，冒泡;  再：React事件的捕获 冒泡； 最后： document的冒泡
+
+</script>
+</html>

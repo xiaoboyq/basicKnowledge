@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <style>
+    body{
+      width: 1200px;
+      text-align: center;
+      margin: 10px auto; 
+    }
+
+
+    .svgBlock {
+      width: 1200px;
+      min-height: 60vh;
+      overflow: 'auto'; 
+    }
+    .cloudBlock {
+      width: 700px;
+      margin: 0 auto;
+      -webkit-animation: fade-in 3.4s linear 1;
+      animation: fade-in 3.4s linear 1;
+    }
+
+    .circle {
+      display: inline-block;
+      position: relative;
+      border-radius: 50%;
+      margin: 6px;
+      overflow: hidden;
+    }
+ 
+    
+    .circle:nth-child(2n) {
+      -webkit-animation: bounce-up 3.4s linear 2;
+      animation: bounce-up 3.4s linear 2;
+    }
+    .circle:nth-child(2n+1) {
+      -webkit-animation: bounce-up 5.4s linear 2;
+      animation: bounce-up 5.4s linear 2;
+    }
+
+    .circle:hover {
+      cursor: pointer;
+      background-color: lightcoral !important;
+      -webkit-animation: bounce-up 3.4s linear infinite;
+      animation: bounce-up 3.4s linear infinite;
+    }
+    
+
+    @-webkit-keyframes bounce-up {
+      25% {
+        -webkit-transform: translateY(10px);
+      }
+
+      50%,
+      100% {
+        -webkit-transform: translateY(0);
+      }
+
+      75% {
+        -webkit-transform: translateY(-10px);
+      }
+    }
+
+    @keyframes bounce-up {
+      25% {
+        transform: translateY(10px);
+      }
+
+      50%,
+      100% {
+        transform: translateY(0);
+      }
+
+      75% {
+        transform: translateY(-10px);
+      }
+    }
+
+
+    @keyframes fade-in {  
+      0% {opacity: 0;}/*初始状态 透明度为0*/  
+      40% {opacity: 0.4;}/*过渡状态 透明度为0*/  
+      100% {opacity: 1;}/*结束状态 透明度为1*/  
+    }  
+    @-webkit-keyframes fade-in {/*针对webkit内核*/  
+      0% {opacity: 0;}  
+      40% {opacity: 0.4;}  
+      100% {opacity: 1;}  
+    } 
+  </style>
+</head>
+
+<body>
+  <div class="svgBlock">
+    <svg
+      width="100%"
+      version="1.1"
+      id="Group-13"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox= "0 0 1896 2390"
+    >
+  
+    <g id="编组-3" transform="translate(12.000000, 48.000000)">
+      <path d="M14,98 L490,98 C491.104569,98 492,98.8954305 492,100 L492,466 C492,467.104569 491.104569,468 490,468 L14,468 C12.8954305,468 12,467.104569 12,466 L12,100 C12,98.8954305 12.8954305,98 14,98 Z" id="Rectangle" fill="#A89446"></path>
+      <path d="M14,862 L490,862 C491.104569,862 492,862.895431 492,864 L492,1230 C492,1231.10457 491.104569,1232 490,1232 L14,1232 C12.8954305,1232 12,1231.10457 12,1230 L12,864 C12,862.895431 12.8954305,862 14,862 Z" id="Rectangle备份-3" fill="#A89446"></path>
+      <path d="M1406,480 L1882,480 C1883.10457,480 1884,480.895431 1884,482 L1884,848 C1884,849.104569 1883.10457,850 1882,850 L1406,850 C1404.89543,850 1404,849.104569 1404,848 L1404,482 C1404,480.895431 1404.89543,480 1406,480 Z" id="Rectangle备份-42" fill="#A89446"></path>
+      <path d="M2,0 L502,0 C503.104569,-2.02906125e-16 504,0.8954305 504,2 L504,1624 C504,1625.10457 503.104569,1626 502,1626 L2,1626 C0.8954305,1626 1.3527075e-16,1625.10457 0,1624 L0,2 C-1.3527075e-16,0.8954305 0.8954305,2.02906125e-16 2,0 Z" id="Rectangle" fill="#0E5B7B"></path>
+      <path d="M1394,0 L1894,0 C1895.10457,-2.02906125e-16 1896,0.8954305 1896,2 L1896,860 C1896,861.104569 1895.10457,862 1894,862 L1394,862 C1392.89543,862 1392,861.104569 1392,860 L1392,2 C1392,0.8954305 1392.89543,2.02906125e-16 1394,0 Z" id="Rectangle备份-43" fill="#38568F"></path>
+      <path d="M25,110 L479,110 C479.552285,110 480,110.447715 480,111 L480,187 C480,187.552285 479.552285,188 479,188 L25,188 C24.4477153,188 24,187.552285 24,187 L24,111 C24,110.447715 24.4477153,110 25,110 Z" id="Rectangle" fill="#8B7A31"></path>
+      <path d="M25,874 L479,874 C479.552285,874 480,874.447715 480,875 L480,951 C480,951.552285 479.552285,952 479,952 L25,952 C24.4477153,952 24,951.552285 24,951 L24,875 C24,874.447715 24.4477153,874 25,874 Z" id="Rectangle备份-5" fill="#8B7A31"></path>
+      <path d="M1417,492 L1871,492 C1871.55228,492 1872,492.447715 1872,493 L1872,569 C1872,569.552285 1871.55228,570 1871,570 L1417,570 C1416.44772,570 1416,569.552285 1416,569 L1416,493 C1416,492.447715 1416.44772,492 1417,492 Z" id="Rectangle备份-45" fill="#8B7A31"></path>
+      <path d="M14,98 L490,98 C491.104569,98 492,98.8954305 492,100 L492,466 C492,467.104569 491.104569,468 490,468 L14,468 C12.8954305,468 12,467.104569 12,466 L12,100 C12,98.8954305 12.8954305,98 14,98 Z" id="Rectangle" fill="#1492CD"></path>
+      <path d="M14,862 L490,862 C491.104569,862 492,862.895431 492,864 L492,1230 C492,1231.10457 491.104569,1232 490,1232 L14,1232 C12.8954305,1232 12,1231.10457 12,1230 L12,864 C12,862.895431 12.8954305,862 14,862 Z" id="Rectangle备份-6" fill="#1492CD"></path>
+      <path d="M1406,480 L1882,480 C1883.10457,480 1884,480.895431 1884,482 L1884,848 C1884,849.104569 1883.10457,850 1882,850 L1406,850 C1404.89543,850 1404,849.104569 1404,848 L1404,482 C1404,480.895431 1404.89543,480 1406,480 Z" id="Rectangle备份-47" fill="#4775CC"></path>
+      <path d="M558,0 L1058,0 C1059.10457,-6.46995335e-16 1060,0.8954305 1060,2 L1060,2388 C1060,2389.10457 1059.10457,2390 1058,2390 L558,2390 C556.895431,2390 556,2389.10457 556,2388 L556,2 C556,0.8954305 556.895431,2.02906125e-16 558,0 Z" id="Rectangle" fill="#397279"></path>
+      <path d="M25,110 L479,110 C479.552285,110 480,110.447715 480,111 L480,187 C480,187.552285 479.552285,188 479,188 L25,188 C24.4477153,188 24,187.552285 24,187 L24,111 C24,110.447715 24.4477153,110 25,110 Z" id="Rectangle" fill="#1878AC"></path>
+      <text id="gaofenzi" names="xxxx" font-family="PingFangSC-Semibold, PingFang SC" font-size="24" font-weight="500" fill="#FFFFFF">
+          <tspan x="192" y="157">高分子材料</tspan>
+      </text>
+      <path d="M25,874 L479,874 C479.552285,874 480,874.447715 480,875 L480,951 C480,951.552285 479.552285,952 479,952 L25,952 C24.4477153,952 24,951.552285 24,951 L24,875 C24,874.447715 24.4477153,874 25,874 Z" id="Rectangle备份-7" fill="#1878AC"></path>
+      <text id="无机非金属材料" font-family="PingFangSC-Semibold, PingFang SC" font-size="24" font-weight="500" fill="#FFFFFF">
+          <tspan x="168" y="921">无机非金属材料</tspan>
+      </text>
+      <path d="M1417,492 L1871,492 C1871.55228,492 1872,492.447715 1872,493 L1872,569 C1872,569.552285 1871.55228,570 1871,570 L1417,570 C1416.44772,570 1416,569.552285 1416,569 L1416,493 C1416,492.447715 1416.44772,492 1417,492 Z" id="Rectangle备份-49" fill="#3F61B5"></path>
+      <text id="线上医疗服务" font-family="PingFangSC-Semibold, PingFang SC" font-size="24" font-weight="500" fill="#FFFFFF">
+          <tspan x="1572" y="539">线上医疗服务</tspan>
+      </text>
+      <path d="M570,98 L1046,98 C1047.10457,98 1048,98.8954305 1048,100 L1048,466 C1048,467.104569 1047.10457,468 1046,468 L570,468 C568.895431,468 568,467.104569 568,466 L568,100 C568,98.8954305 568.895431,98 570,98 Z" id="Rectangle" fill="#4A9CA5"></path>
+      <path d="M570,480 L1046,480 C1047.10457,480 1048,480.895431 1048,482 L1048,848 C1048,849.104569 1047.10457,850 1046,850 L570,850 C568.895431,850 568,849.104569 568,848 L568,482 C568,480.895431 568.895431,480 570,480 Z" id="Rectangle备份-10" fill="#4A9CA5"></path>
+      <path d="M571,1626 L1047,1626 C1048.10457,1626 1049,1626.89543 1049,1628 L1049,1994 C1049,1995.10457 1048.10457,1996 1047,1996 L571,1996 C569.895431,1996 569,1995.10457 569,1994 L569,1628 C569,1626.89543 569.895431,1626 571,1626 Z" id="Rectangle备份-26" fill="#4A9CA5"></path>
+      <path d="M571,862 L1047,862 C1048.10457,862 1049,862.895431 1049,864 L1049,1230 C1049,1231.10457 1048.10457,1232 1047,1232 L571,1232 C569.895431,1232 569,1231.10457 569,1230 L569,864 C569,862.895431 569.895431,862 571,862 Z" id="Rectangle备份-31" fill="#4A9CA5"></path>
+      <path d="M571,1244 L1047,1244 C1048.10457,1244 1049,1244.89543 1049,1246 L1049,1612 C1049,1613.10457 1048.10457,1614 1047,1614 L571,1614 C569.895431,1614 569,1613.10457 569,1612 L569,1246 C569,1244.89543 569.895431,1244 571,1244 Z" id="Rectangle备份-12" fill="#4A9CA5"></path>
+      <path d="M571,2008 L1047,2008 C1048.10457,2008 1049,2008.89543 1049,2010 L1049,2376 C1049,2377.10457 1048.10457,2378 1047,2378 L571,2378 C569.895431,2378 569,2377.10457 569,2376 L569,2010 C569,2008.89543 569.895431,2008 571,2008 Z" id="Rectangle备份-23" fill="#4A9CA5"></path>
+      <path d="M581,110 L1035,110 C1035.55228,110 1036,110.447715 1036,111 L1036,187 C1036,187.552285 1035.55228,188 1035,188 L581,188 C580.447715,188 580,187.552285 580,187 L580,111 C580,110.447715 580.447715,110 581,110 Z" id="Rectangle" fill="#34808A"></path>
+      <text id="手术器械" font-family="PingFangSC-Semibold, PingFang SC" font-size="24" font-weight="500" fill="#FFFFFF">
+          <tspan x="760" y="157">手术器械</tspan>
+      </text>
+      <path d="M581,492 L1035,492 C1035.55228,492 1036,492.447715 1036,493 L1036,569 C1036,569.552285 1035.55228,570 1035,570 L581,570 C580.447715,570 580,569.552285 580,569 L580,493 C580,492.447715 580.447715,492 581,492 Z" id="Rectangle备份-21" fill="#34808A"></path>
+      <text id="诊断设备" font-family="PingFangSC-Semibold, PingFang SC" font-size="24" font-weight="500" fill="#FFFFFF">
+          <tspan x="760" y="539">诊断设备</tspan>
+      </text>
+      <path d="M582,1638 L1036,1638 C1036.55228,1638 1037,1638.44772 1037,1639 L1037,1715 C1037,1715.55228 1036.55228,1716 1036,1716 L582,1716 C581.447715,1716 581,1715.55228 581,1715 L581,1639 C581,1638.44772 581.447715,1638 582,1638 Z" id="Rectangle备份-27" fill="#34808A"></path>
+      <text id="辅助设备" font-family="PingFangSC-Semibold, PingFang SC" font-size="24" font-weight="500" fill="#FFFFFF">
+          <tspan x="761" y="1685">辅助设备</tspan>
+      </text>
+      <path d="M582,874 L1036,874 C1036.55228,874 1037,874.447715 1037,875 L1037,951 C1037,951.552285 1036.55228,952 1036,952 L582,952 C581.447715,952 581,951.552285 581,951 L581,875 C581,874.447715 581.447715,874 582,874 Z" id="Rectangle备份-32" fill="#34808A"></path>
+      <text id="医用耗材" font-family="PingFangSC-Semibold, PingFang SC" font-size="24" font-weight="500" fill="#FFFFFF">
+          <tspan x="761" y="921">医用耗材</tspan>
+      </text>
+      <path d="M582,1256 L1036,1256 C1036.55228,1256 1037,1256.44772 1037,1257 L1037,1333 C1037,1333.55228 1036.55228,1334 1036,1334 L582,1334 C581.447715,1334 581,1333.55228 581,1333 L581,1257 C581,1256.44772 581.447715,1256 582,1256 Z" id="Rectangle备份-13" fill="#34808A"></path>
+      <text id="治疗设备" font-family="PingFangSC-Semibold, PingFang SC" font-size="24" font-weight="500" fill="#FFFFFF">
+          <tspan x="761" y="1303">治疗设备</tspan>
+      </text>
+      <path d="M582,2020 L1036,2020 C1036.55228,2020 1037,2020.44772 1037,2021 L1037,2097 C1037,2097.55228 1036.55228,2098 1036,2098 L582,2098 C581.447715,2098 581,2097.55228 581,2097 L581,2021 C581,2020.44772 581.447715,2020 582,2020 Z" id="Rectangle备份-24" fill="#34808A"></path>
+      <text id="科室及其他器械" font-family="PingFangSC-Semibold, PingFang SC" font-size="24" font-weight="500" fill="#FFFFFF">
+          <tspan x="725" y="2067">科室及其他器械</tspan>
+      </text>
+      <path d="M581,200 L801,200 C801.552285,200 802,200.447715 802,201 L802,321 C802,321.552285 801.552285,322 801,322 L581,322 C580.447715,322 580,321.552285 580,321 L580,201 C580,200.447715 580.447715,200 581,200 Z" id="Rectangle" fill="#5BB6BC"></path>
+      <text id="有源手术器械" font-family="PingFangSC-Semibold, PingFang SC" font-size="22" font-weight="500" fill="#FFFFFF">
+          <tspan x="625" y="248">有源手术器械</tspan>
+      </text>
+      <text id="2-|-10" font-family="PingFangSC-Semibold, PingFang SC" font-size="28" font-weight="500" fill="#FFFFFF">
+          <tspan x="656.14" y="291">2 | 10</tspan>
+      </text>
+      <path d="M581,582 L1035,582 C1035.55228,582 1036,582.447715 1036,583 L1036,703 C1036,703.552285 1035.55228,704 1035,704 L581,704 C580.447715,704 580,703.552285 580,703 L580,583 C580,582.447715 580.447715,582 581,582 Z" id="Rectangle备份-22" fill="#5BB6BC"></path>
+      <text id="医用成像设备" font-family="PingFangSC-Semibold, PingFang SC" font-size="22" font-weight="500" fill="#FFFFFF">
+          <tspan x="743" y="630">医用成像设备</tspan>
+      </text>
+      <text id="2-|-10备份-12" font-family="PingFangSC-Semibold, PingFang SC" font-size="28" font-weight="500" fill="#FFFFFF">
+          <tspan x="774.14" y="673">2 | 10</tspan>
+      </text>
+      <path d="M582,1728 L802,1728 C802.552285,1728 803,1728.44772 803,1729 L803,1849 C803,1849.55228 802.552285,1850 802,1850 L582,1850 C581.447715,1850 581,1849.55228 581,1849 L581,1729 C581,1728.44772 581.447715,1728 582,1728 Z" id="Rectangle备份-28" fill="#5BB6BC"></path>
+      <text id="医疗器械消毒-灭菌器械" font-family="PingFangSC-Semibold, PingFang SC" font-size="22" font-weight="500" fill="#FFFFFF">
+          <tspan x="626" y="1761">医疗器械消毒</tspan>
+          <tspan x="648" y="1791">灭菌器械</tspan>
+      </text>
+      <text id="2-|-10备份-16" font-family="PingFangSC-Semibold, PingFang SC" font-size="28" font-weight="500" fill="#FFFFFF">
+          <tspan x="657.14" y="1819">2 | 10</tspan>
+      </text>
+      <path d="M582,964 L802,964 C802.552285,964 803,964.447715 803,965 L803,1085 C803,1085.55228 802.552285,1086 802,1086 L582,1086 C581.447715,1086 581,1085.55228 581,1085 L581,965 C581,964.447715 581.447715,964 582,964 Z" id="Rectangle备份-33" fill="#5BB6BC"></path>
+      <text id="有源植入器械" font-family="PingFangSC-Semibold, PingFang SC" font-size="22" font-weight="500" fill="#FFFFFF">
+          <tspan x="626" y="1012">有源植入器械</tspan>
+      </text>
+      <text id="2-|-10备份-19" font-family="PingFangSC-Semibold, PingFang SC" font-size="28" font-weight="500" fill="#FFFFFF">
+          <tspan x="657.14" y="1055">2 | 10</tspan>
+      </text>
+      <path d="M582,1346 L724,1346 C724.552285,1346 725,1346.44772 725,1347 L725,1467 C725,1467.55228 724.552285,1468 724,1468 L582,1468 C581.447715,1468 581,1467.55228 581,1467 L581,1347 C581,1346.44772 581.447715,1346 582,1346 Z" id="Rectangle备份-15" fill="#5BB6BC"></path>
+      <text id="放射治疗器械" font-family="PingFangSC-Semibold, PingFang SC" font-size="22" font-weight="500" fill="#FFFFFF">
+          <tspan x="587" y="1394">放射治疗器械</tspan>
+      </text>
+      <text id="2-|-10备份-3" font-family="PingFangSC-Semibold, PingFang SC" font-size="28" font-weight="500" fill="#FFFFFF">
+          <tspan x="618.14" y="1437">2 | 10</tspan>
+      </text>
+      <path d="M582,2110 L724,2110 C724.552285,2110 725,2110.44772 725,2111 L725,2231 C725,2231.55228 724.552285,2232 724,2232 L582,2232 C581.447715,2232 581,2231.55228 581,2231 L581,2111 C581,2110.44772 581.447715,2110 582,2110 Z" id="Rectangle备份-36" fill="#5BB6BC"></path>
+      <text id="眼科器械" font-family="PingFangSC-Semibold, PingFang SC" font-size="22" font-weight="500" fill="#FFFFFF">
+          <tspan x="609" y="2158">眼科器械</tspan>
+      </text>
+      <text id="2-|-10备份-13" font-family="PingFangSC-Semibold, PingFang SC" font-size="28" font-weight="500" fill="#FFFFFF">
+          <tspan x="618.14" y="2201">2 | 10</tspan>
+      </text>
+      <path d="M815,200 L1035,200 C1035.55228,200 1036,200.447715 1036,201 L1036,321 C1036,321.552285 1035.55228,322 1035,322 L815,322 C814.447715,322 814,321.552285 814,321 L814,201 C814,200.447715 814.447715,200 815,200 Z" id="Rectangle" fill="#5BB6BC"></path>
+      <text id="无源手术器械" font-family="PingFangSC-Semibold, PingFang SC" font-size="22" font-weight="500" fill="#FFFFFF">
+          <tspan x="859" y="248">无源手术器械</tspan>
+      </text>
+      <text id="2-|-10" font-family="PingFangSC-Semibold, PingFang SC" font-size="28" font-weight="500" fill="#FFFFFF">
+          <tspan x="890.14" y="291">2 | 10</tspan>
+      </text>
+      <path d="M816,1728 L1036,1728 C1036.55228,1728 1037,1728.44772 1037,1729 L1037,1849 C1037,1849.55228 1036.55228,1850 1036,1850 L816,1850 C815.447715,1850 815,1849.55228 815,1849 L815,1729 C815,1728.44772 815.447715,1728 816,1728 Z" id="Rectangle备份-29" fill="#5BB6BC"></path>
+      <text id="患者承载器械" font-family="PingFangSC-Semibold, PingFang SC" font-size="22" font-weight="500" fill="#FFFFFF">
+          <tspan x="860" y="1776">患者承载器械</tspan>
+      </text>
+      <text id="2-|-10备份-17" font-family="PingFangSC-Semibold, PingFang SC" font-size="28" font-weight="500" fill="#FFFFFF">
+          <tspan x="891.14" y="1819">2 | 10</tspan>
+      </text>
+      <path d="M816,964 L1036,964 C1036.55228,964 1037,964.447715 1037,965 L1037,1085 C1037,1085.55228 1036.55228,1086 1036,1086 L816,1086 C815.447715,1086 815,1085.55228 815,1085 L815,965 C815,964.447715 815.447715,964 816,964 Z" id="Rectangle备份-34" fill="#5BB6BC"></path>
+      <text id="无源植入器械" font-family="PingFangSC-Semibold, PingFang SC" font-size="22" font-weight="500" fill="#FFFFFF">
+          <tspan x="860" y="1012">无源植入器械</tspan>
+      </text>
+      <text id="2-|-10备份-20" font-family="PingFangSC-Semibold, PingFang SC" font-size="28" font-weight="500" fill="#FFFFFF">
+          <tspan x="891.14" y="1055">2 | 10</tspan>
+      </text>
+      <path d="M738,1346 L880,1346 C880.552285,1346 881,1346.44772 881,1347 L881,1467 C881,1467.55228 880.552285,1468 880,1468 L738,1468 C737.447715,1468 737,1467.55228 737,1467 L737,1347 C737,1346.44772 737.447715,1346 738,1346 Z" id="Rectangle备份-17" fill="#5BB6BC"></path>
+      <text id="医用诊查和-监护器械" font-family="PingFangSC-Semibold, PingFang SC" font-size="22" font-weight="500" fill="#FFFFFF">
+          <tspan x="754" y="1379">医用诊查和</tspan>
+          <tspan x="765" y="1409">监护器械</tspan>
+      </text>
+      <text id="2-|-10备份-6" font-family="PingFangSC-Semibold, PingFang SC" font-size="28" font-weight="500" fill="#FFFFFF">
+          <tspan x="774.14" y="1437">2 | 10</tspan>
+      </text>
+      <path d="M738,2110 L880,2110 C880.552285,2110 881,2110.44772 881,2111 L881,2231 C881,2231.55228 880.552285,2232 880,2232 L738,2232 C737.447715,2232 737,2231.55228 737,2231 L737,2111 C737,2110.44772 737.447715,2110 738,2110 Z" id="Rectangle备份-37" fill="#5BB6BC"></path>
+      <text id="口腔科器械" font-family="PingFangSC-Semibold, PingFang SC" font-size="22" font-weight="500" fill="#FFFFFF">
+          <tspan x="754" y="2158">口腔科器械</tspan>
+      </text>
+      <text id="2-|-10备份-14" font-family="PingFangSC-Semibold, PingFang SC" font-size="28" font-weight="500" fill="#FFFFFF">
+          <tspan x="774.14" y="2201">2 | 10</tspan>
+      </text>
+      <path d="M894,1346 L1036,1346 C1036.55228,1346 1037,1346.44772 1037,1347 L1037,1467 C1037,1467.55228 1036.55228,1468 1036,1468 L894,1468 C893.447715,1468 893,1467.55228 893,1467 L893,1347 C893,1346.44772 893.447715,1346 894,1346 Z" id="Rectangle备份-19" fill="#5BB6BC"></path>
+      <text id="呼吸、麻醉-和急救器械" font-family="PingFangSC-Semibold, PingFang SC" font-size="22" font-weight="500" fill="#FFFFFF">
+          <tspan x="910" y="1379">呼吸、麻醉</tspan>
+          <tspan x="910" y="1409">和急救器械</tspan>
+      </text>
+      <text id="2-|-10备份-9" font-family="PingFangSC-Semibold, PingFang SC" font-size="28" font-weight="500" fill="#FFFFFF">
+          <tspan x="930.14" y="1437">2 | 10</tspan>
+      </text>
+      <path d="M894,2110 L1036,2110 C1036.55228,2110 1037,2110.44772 1037,2111 L1037,2231 C1037,2231.55228 1036.55228,2232 1036,2232 L894,2232 C893.447715,2232 893,2231.55228 893,2231 L893,2111 C893,2110.44772 893.447715,2110 894,2110 Z" id="Rectangle备份-38" fill="#5BB6BC"></path>
+      <text id="中医器械" font-family="PingFangSC-Semibold, PingFang SC" font-size="22" font-weight="500" fill="#FFFFFF">
+          <tspan x="921" y="2158">中医器械</tspan>
+      </text>
+      <text id="2-|-10备份-22" font-family="PingFangSC-Semibold, PingFang SC" font-size="28" font-weight="500" fill="#FFFFFF">
+          <tspan x="930.14" y="2201">2 | 10</tspan>
+      </text>
+      <path d="M581,334 L801,334 C801.552285,334 802,334.447715 802,335 L802,455 C802,455.552285 801.552285,456 801,456 L581,456 C580.447715,456 580,455.552285 580,455 L580,335 C580,334.447715 580.447715,334 581,334 Z" id="Rectangle" fill="#5BB6BC"></path>
+      <text id="神经和心血管手术器械" font-family="PingFangSC-Semibold, PingFang SC" font-size="22" font-weight="500" fill="#FFFFFF">
+          <tspan x="581" y="382">神经和心血管手术器械</tspan>
+      </text>
+      <text id="2-|-10" font-family="PingFangSC-Semibold, PingFang SC" font-size="28" font-weight="500" fill="#FFFFFF">
+          <tspan x="656.14" y="425">2 | 10</tspan>
+      </text>
+      <path d="M582,1862 L1036,1862 C1036.55228,1862 1037,1862.44772 1037,1863 L1037,1983 C1037,1983.55228 1036.55228,1984 1036,1984 L582,1984 C581.447715,1984 581,1983.55228 581,1983 L581,1863 C581,1862.44772 581.447715,1862 582,1862 Z" id="Rectangle备份-30" fill="#5BB6BC"></path>
+      <text id="医用软件" font-family="PingFangSC-Semibold, PingFang SC" font-size="22" font-weight="500" fill="#FFFFFF">
+          <tspan x="765" y="1910">医用软件</tspan>
+      </text>
+      <text id="2-|-10备份-18" font-family="PingFangSC-Semibold, PingFang SC" font-size="28" font-weight="500" fill="#FFFFFF">
+          <tspan x="774.14" y="1953">2 | 10</tspan>
+      </text>
+      <path d="M582,1098 L1036,1098 C1036.55228,1098 1037,1098.44772 1037,1099 L1037,1219 C1037,1219.55228 1036.55228,1220 1036,1220 L582,1220 C581.447715,1220 581,1219.55228 581,1219 L581,1099 C581,1098.44772 581.447715,1098 582,1098 Z" id="Rectangle备份-35" fill="#5BB6BC"></path>
+      <text id="注输、护理和防护器械" font-family="PingFangSC-Semibold, PingFang SC" font-size="22" font-weight="500" fill="#FFFFFF">
+          <tspan x="699" y="1146">注输、护理和防护器械</tspan>
+      </text>
+      <text id="2-|-10备份-21" font-family="PingFangSC-Semibold, PingFang SC" font-size="28" font-weight="500" fill="#FFFFFF">
+          <tspan x="774.14" y="1189">2 | 10</tspan>
+      </text>
+      <path d="M582,1480 L802,1480 C802.552285,1480 803,1480.44772 803,1481 L803,1601 C803,1601.55228 802.552285,1602 802,1602 L582,1602 C581.447715,1602 581,1601.55228 581,1601 L581,1481 C581,1480.44772 581.447715,1480 582,1480 Z" id="Rectangle备份-18" fill="#5BB6BC"></path>
+      <text id="物理治疗器械" font-family="PingFangSC-Semibold, PingFang SC" font-size="22" font-weight="500" fill="#FFFFFF">
+          <tspan x="626" y="1528">物理治疗器械</tspan>
+      </text>
+      <text id="2-|-10备份-7" font-family="PingFangSC-Semibold, PingFang SC" font-size="28" font-weight="500" fill="#FFFFFF">
+          <tspan x="657.14" y="1571">2 | 10</tspan>
+      </text>
+      <path d="M582,2244 L802,2244 C802.552285,2244 803,2244.44772 803,2245 L803,2365 C803,2365.55228 802.552285,2366 802,2366 L582,2366 C581.447715,2366 581,2365.55228 581,2365 L581,2245 C581,2244.44772 581.447715,2244 582,2244 Z" id="Rectangle备份-39" fill="#5BB6BC"></path>
+      <text id="医用康复器械" font-family="PingFangSC-Semibold, PingFang SC" font-size="22" font-weight="500" fill="#FFFFFF">
+          <tspan x="626" y="2292">医用康复器械</tspan>
+      </text>
+      <text id="2-|-10备份-23" font-family="PingFangSC-Semibold, PingFang SC" font-size="28" font-weight="500" fill="#FFFFFF">
+          <tspan x="657.14" y="2335">2 | 10</tspan>
+      </text>
+      <path d="M816,1480 L1036,1480 C1036.55228,1480 1037,1480.44772 1037,1481 L1037,1601 C1037,1601.55228 1036.55228,1602 1036,1602 L816,1602 C815.447715,1602 815,1601.55228 815,1601 L815,1481 C815,1480.44772 815.447715,1480 816,1480 Z" id="Rectangle备份-20" fill="#5BB6BC"></path>
+      <text id="输血、透析和-体外循环器械" font-family="PingFangSC-Semibold, PingFang SC" font-size="22" font-weight="500" fill="#FFFFFF">
+          <tspan x="860" y="1513">输血、透析和</tspan>
+          <tspan x="860" y="1543">体外循环器械</tspan>
+      </text>
+      <text id="2-|-10备份-11" font-family="PingFangSC-Semibold, PingFang SC" font-size="28" font-weight="500" fill="#FFFFFF">
+          <tspan x="891.14" y="1571">2 | 10</tspan>
+      </text>
+      <path d="M816,2244 L1036,2244 C1036.55228,2244 1037,2244.44772 1037,2245 L1037,2365 C1037,2365.55228 1036.55228,2366 1036,2366 L816,2366 C815.447715,2366 815,2365.55228 815,2365 L815,2245 C815,2244.44772 815.447715,2244 816,2244 Z" id="Rectangle备份-40" fill="#5BB6BC"></path>
+      <text id="妇产科、生殖和避孕器械" font-family="PingFangSC-Semibold, PingFang SC" font-size="22" font-weight="500" fill="#FFFFFF">
+          <tspan x="849" y="2277">妇产科、生殖和</tspan>
+          <tspan x="882" y="2307">避孕器械</tspan>
+      </text>
+      <text id="2-|-10备份-24" font-family="PingFangSC-Semibold, PingFang SC" font-size="28" font-weight="500" fill="#FFFFFF">
+          <tspan x="891.14" y="2335">2 | 10</tspan>
+      </text>
+      <path d="M815,334 L1035,334 C1035.55228,334 1036,334.447715 1036,335 L1036,455 C1036,455.552285 1035.55228,456 1035,456 L815,456 C814.447715,456 814,455.552285 814,455 L814,335 C814,334.447715 814.447715,334 815,334 Z" id="Rectangle" fill="#5BB6BC"></path>
+      <text id="骨科手术器械" font-family="PingFangSC-Semibold, PingFang SC" font-size="22" font-weight="500" fill="#FFFFFF">
+          <tspan x="859" y="382">骨科手术器械</tspan>
+      </text>
+      <text id="2-|-10" font-family="PingFangSC-Semibold, PingFang SC" font-size="28" font-weight="500" fill="#FFFFFF">
+          <tspan x="890.14" y="425">2 | 10</tspan>
+      </text>
+      <path d="M582,716 L1035,716 C1035.55228,716 1036,716.447715 1036,717 L1036,837 C1036,837.552285 1035.55228,838 1035,838 L582,838 C581.447715,838 581,837.552285 581,837 L581,717 C581,716.447715 581.447715,716 582,716 Z" id="Rectangle备份-25" fill="#5BB6BC"></path>
+      <text id="临床检验器械" font-family="PingFangSC-Semibold, PingFang SC" font-size="22" font-weight="500" fill="#FFFFFF">
+          <tspan x="743" y="764">临床检验器械</tspan>
+      </text>
+      <text id="2-|-10备份-15" font-family="PingFangSC-Semibold, PingFang SC" font-size="28" font-weight="500" fill="#FFFFFF">
+          <tspan x="774.14" y="807">2 | 10</tspan>
+      </text>
+      <path d="M14,480 L490,480 C491.104569,480 492,480.895431 492,482 L492,848 C492,849.104569 491.104569,850 490,850 L14,850 C12.8954305,850 12,849.104569 12,848 L12,482 C12,480.895431 12.8954305,480 14,480 Z" id="Rectangle" fill="#1492CD"></path>
+      <path d="M1406,98 L1882,98 C1883.10457,98 1884,98.8954305 1884,100 L1884,466 C1884,467.104569 1883.10457,468 1882,468 L1406,468 C1404.89543,468 1404,467.104569 1404,466 L1404,100 C1404,98.8954305 1404.89543,98 1406,98 Z" id="Rectangle备份-50" fill="#4775CC"></path>
+      <path d="M25,492 L479,492 C479.552285,492 480,492.447715 480,493 L480,569 C480,569.552285 479.552285,570 479,570 L25,570 C24.4477153,570 24,569.552285 24,569 L24,493 C24,492.447715 24.4477153,492 25,492 Z" id="Rectangle" fill="#1878AC"></path>
+      <text id="金属材料" font-family="PingFangSC-Semibold, PingFang SC" font-size="24" font-weight="500" fill="#FFFFFF">
+          <tspan x="204" y="539">金属材料</tspan>
+      </text>
+      <path d="M1417,110 L1871,110 C1871.55228,110 1872,110.447715 1872,111 L1872,187 C1872,187.552285 1871.55228,188 1871,188 L1417,188 C1416.44772,188 1416,187.552285 1416,187 L1416,111 C1416,110.447715 1416.44772,110 1417,110 Z" id="Rectangle备份-51" fill="#3F61B5"></path>
+      <text id="线下医疗服务" font-family="PingFangSC-Semibold, PingFang SC" font-size="24" font-weight="500" fill="#FFFFFF">
+          <tspan x="1572" y="157">线下医疗服务</tspan>
+      </text>
+      <path d="M25,582 L245,582 C245.552285,582 246,582.447715 246,583 L246,703 C246,703.552285 245.552285,704 245,704 L25,704 C24.4477153,704 24,703.552285 24,703 L24,583 C24,582.447715 24.4477153,582 25,582 Z" id="Rectangle" fill="#23A9E0"></path>
+      <text id="钛及钛合金" font-family="PingFangSC-Semibold, PingFang SC" font-size="22" font-weight="500" fill="#FFFFFF">
+          <tspan x="80" y="630">钛及钛合金</tspan>
+      </text>
+      <text id="2-|-10" font-family="PingFangSC-Semibold, PingFang SC" font-size="28" font-weight="500" fill="#FFFFFF">
+          <tspan x="100.14" y="673">2 | 10</tspan>
+      </text>
+      <path d="M1417,200 L1637,200 C1637.55228,200 1638,200.447715 1638,201 L1638,321 C1638,321.552285 1637.55228,322 1637,322 L1417,322 C1416.44772,322 1416,321.552285 1416,321 L1416,201 C1416,200.447715 1416.44772,200 1417,200 Z" id="Rectangle备份-52" fill="#5889DC"></path>
+      <text id="专科、综合医院" font-family="PingFangSC-Semibold, PingFang SC" font-size="22" font-weight="500" fill="#FFFFFF">
+          <tspan x="1450" y="248">专科、综合医院</tspan>
+      </text>
+      <text id="2-|-10备份-25" font-family="PingFangSC-Semibold, PingFang SC" font-size="28" font-weight="500" fill="#FFFFFF">
+          <tspan x="1492.14" y="291">2 | 10</tspan>
+      </text>
+      <path d="M259,582 L479,582 C479.552285,582 480,582.447715 480,583 L480,703 C480,703.552285 479.552285,704 479,704 L259,704 C258.447715,704 258,703.552285 258,703 L258,583 C258,582.447715 258.447715,582 259,582 Z" id="Rectangle" fill="#23A9E0"></path>
+      <text id="钴基合金" font-family="PingFangSC-Semibold, PingFang SC" font-size="22" font-weight="500" fill="#FFFFFF">
+          <tspan x="325" y="630">钴基合金</tspan>
+      </text>
+      <text id="2-|-10" font-family="PingFangSC-Semibold, PingFang SC" font-size="28" font-weight="500" fill="#FFFFFF">
+          <tspan x="334.14" y="673">2 | 10</tspan>
+      </text>
+      <path d="M1651,200 L1871,200 C1871.55228,200 1872,200.447715 1872,201 L1872,321 C1872,321.552285 1871.55228,322 1871,322 L1651,322 C1650.44772,322 1650,321.552285 1650,321 L1650,201 C1650,200.447715 1650.44772,200 1651,200 Z" id="Rectangle备份-53" fill="#5889DC"></path>
+      <text id="健康管理机构" font-family="PingFangSC-Semibold, PingFang SC" font-size="22" font-weight="500" fill="#FFFFFF">
+          <tspan x="1695" y="248">健康管理机构</tspan>
+      </text>
+      <text id="2-|-10备份-26" font-family="PingFangSC-Semibold, PingFang SC" font-size="28" font-weight="500" fill="#FFFFFF">
+          <tspan x="1726.14" y="291">2 | 10</tspan>
+      </text>
+      <path d="M25,716 L245,716 C245.552285,716 246,716.447715 246,717 L246,837 C246,837.552285 245.552285,838 245,838 L25,838 C24.4477153,838 24,837.552285 24,837 L24,717 C24,716.447715 24.4477153,716 25,716 Z" id="Rectangle" fill="#23A9E0"></path>
+      <text id="不锈钢" font-family="PingFangSC-Semibold, PingFang SC" font-size="22" font-weight="500" fill="#FFFFFF">
+          <tspan x="102" y="764">不锈钢</tspan>
+      </text>
+      <text id="2-|-10" font-family="PingFangSC-Semibold, PingFang SC" font-size="28" font-weight="500" fill="#FFFFFF">
+          <tspan x="100.14" y="807">2 | 10</tspan>
+      </text>
+      <path d="M1417,334 L1637,334 C1637.55228,334 1638,334.447715 1638,335 L1638,455 C1638,455.552285 1637.55228,456 1637,456 L1417,456 C1416.44772,456 1416,455.552285 1416,455 L1416,335 C1416,334.447715 1416.44772,334 1417,334 Z" id="Rectangle备份-54" fill="#5889DC"></path>
+      <text id="康复机构" font-family="PingFangSC-Semibold, PingFang SC" font-size="22" font-weight="500" fill="#FFFFFF">
+          <tspan x="1483" y="382">康复机构</tspan>
+      </text>
+      <text id="2-|-10备份-27" font-family="PingFangSC-Semibold, PingFang SC" font-size="28" font-weight="500" fill="#FFFFFF">
+          <tspan x="1492.14" y="425">2 | 10</tspan>
+      </text>
+      <path d="M259,716 L479,716 C479.552285,716 480,716.447715 480,717 L480,837 C480,837.552285 479.552285,838 479,838 L259,838 C258.447715,838 258,837.552285 258,837 L258,717 C258,716.447715 258.447715,716 259,716 Z" id="Rectangle备份" fill="#23A9E0"></path>
+      <text id="其他医用金属材料" font-family="PingFangSC-Semibold, PingFang SC" font-size="22" font-weight="500" fill="#FFFFFF">
+          <tspan x="281" y="764">其他医用金属材料</tspan>
+      </text>
+      <text id="2-|-10备份" font-family="PingFangSC-Semibold, PingFang SC" font-size="28" font-weight="500" fill="#FFFFFF">
+          <tspan x="334.14" y="807">2 | 10</tspan>
+      </text>
+      <path d="M1651,334 L1871,334 C1871.55228,334 1872,334.447715 1872,335 L1872,455 C1872,455.552285 1871.55228,456 1871,456 L1651,456 C1650.44772,456 1650,455.552285 1650,455 L1650,335 C1650,334.447715 1650.44772,334 1651,334 Z" id="Rectangle备份-55" fill="#5889DC"></path>
+      <text id="第三方独立医疗机构" font-family="PingFangSC-Semibold, PingFang SC" font-size="22" font-weight="500" fill="#FFFFFF">
+          <tspan x="1662" y="382">第三方独立医疗机构</tspan>
+      </text>
+      <text id="2-|-10备份-28" font-family="PingFangSC-Semibold, PingFang SC" font-size="28" font-weight="500" fill="#FFFFFF">
+          <tspan x="1726.14" y="425">2 | 10</tspan>
+      </text>
+      <path d="M14,1244 L490,1244 C491.104569,1244 492,1244.89543 492,1246 L492,1612 C492,1613.10457 491.104569,1614 490,1614 L14,1614 C12.8954305,1614 12,1613.10457 12,1612 L12,1246 C12,1244.89543 12.8954305,1244 14,1244 Z" id="Rectangle备份-8" fill="#1492CD"></path>
+      <path d="M25,1256 L479,1256 C479.552285,1256 480,1256.44772 480,1257 L480,1601 C480,1601.55228 479.552285,1602 479,1602 L25,1602 C24.4477153,1602 24,1601.55228 24,1601 L24,1257 C24,1256.44772 24.4477153,1256 25,1256 Z" id="Rectangle备份-9" fill="#1878AC"></path>
+      <text id="医疗电子及其他零部件" font-family="PingFangSC-Semibold, PingFang SC" font-size="24" font-weight="500" fill="#FFFFFF">
+          <tspan x="132" y="1438">医疗电子及其他零部件</tspan>
+      </text>
+      <path d="M25,200 L479,200 C479.552285,200 480,200.447715 480,201 L480,321 C480,321.552285 479.552285,322 479,322 L25,322 C24.4477153,322 24,321.552285 24,321 L24,201 C24,200.447715 24.4477153,200 25,200 Z" id="Rectangle备份-2" fill="#23A9E0"></path>
+      <text id="人工器官材料" font-family="PingFangSC-Semibold, PingFang SC" font-size="22" font-weight="500" fill="#FFFFFF">
+          <tspan x="186" y="248">人工器官材料</tspan>
+      </text>
+      <text id="2-|-10备份-2" font-family="PingFangSC-Semibold, PingFang SC" font-size="28" font-weight="500" fill="#FFFFFF">
+          <tspan x="217.14" y="291">2 | 10</tspan>
+      </text>
+      <path d="M25,964 L245,964 C245.552285,964 246,964.447715 246,965 L246,1085 C246,1085.55228 245.552285,1086 245,1086 L25,1086 C24.4477153,1086 24,1085.55228 24,1085 L24,965 C24,964.447715 24.4477153,964 25,964 Z" id="Rectangle备份-11" fill="#23A9E0"></path>
+      <text id="生物陶瓷" font-family="PingFangSC-Semibold, PingFang SC" font-size="22" font-weight="500" fill="#FFFFFF">
+          <tspan x="91" y="1012">生物陶瓷</tspan>
+      </text>
+      <text id="2-|-10备份-5" font-family="PingFangSC-Semibold, PingFang SC" font-size="28" font-weight="500" fill="#FFFFFF">
+          <tspan x="100.14" y="1055">2 | 10</tspan>
+      </text>
+      <path d="M1417,582 L1871,582 C1871.55228,582 1872,582.447715 1872,583 L1872,837 C1872,837.552285 1871.55228,838 1871,838 L1417,838 C1416.44772,838 1416,837.552285 1416,837 L1416,583 C1416,582.447715 1416.44772,582 1417,582 Z" id="Rectangle备份-59" fill="#5889DC"></path>
+      <text id="互联网医疗" font-family="PingFangSC-Semibold, PingFang SC" font-size="22" font-weight="500" fill="#FFFFFF">
+          <tspan x="1589" y="695">互联网医疗</tspan>
+      </text>
+      <text id="2-|-10备份-30" font-family="PingFangSC-Semibold, PingFang SC" font-size="28" font-weight="500" fill="#FFFFFF">
+          <tspan x="1609.14" y="738">2 | 10</tspan>
+      </text>
+      <path d="M259,964 L479,964 C479.552285,964 480,964.447715 480,965 L480,1085 C480,1085.55228 479.552285,1086 479,1086 L259,1086 C258.447715,1086 258,1085.55228 258,1085 L258,965 C258,964.447715 258.447715,964 259,964 Z" id="Rectangle备份-16" fill="#23A9E0"></path>
+      <text id="生物玻璃" font-family="PingFangSC-Semibold, PingFang SC" font-size="22" font-weight="500" fill="#FFFFFF">
+          <tspan x="325" y="1012">生物玻璃</tspan>
+      </text>
+      <text id="2-|-10备份-10" font-family="PingFangSC-Semibold, PingFang SC" font-size="28" font-weight="500" fill="#FFFFFF">
+          <tspan x="334.14" y="1055">2 | 10</tspan>
+      </text>
+      <path d="M25,334 L479,334 C479.552285,334 480,334.447715 480,335 L480,455 C480,455.552285 479.552285,456 479,456 L25,456 C24.4477153,456 24,455.552285 24,455 L24,335 C24,334.447715 24.4477153,334 25,334 Z" id="Rectangle备份-4" fill="#23A9E0"></path>
+      <text id="医疗器具材料" font-family="PingFangSC-Semibold, PingFang SC" font-size="22" font-weight="500" fill="#FFFFFF">
+          <tspan x="186" y="382">医疗器具材料</tspan>
+      </text>
+      <text id="2-|-10备份-4" font-family="PingFangSC-Semibold, PingFang SC" font-size="28" font-weight="500" fill="#FFFFFF">
+          <tspan x="217.14" y="425">2 | 10</tspan>
+      </text>
+      <path d="M25,1098 L479,1098 C479.552285,1098 480,1098.44772 480,1099 L480,1219 C480,1219.55228 479.552285,1220 479,1220 L25,1220 C24.4477153,1220 24,1219.55228 24,1219 L24,1099 C24,1098.44772 24.4477153,1098 25,1098 Z" id="Rectangle备份-14" fill="#23A9E0"></path>
+      <text id="其他医用无机非金属材料" font-family="PingFangSC-Semibold, PingFang SC" font-size="22" font-weight="500" fill="#FFFFFF">
+          <tspan x="131" y="1146">其他医用无机非金属材料</tspan>
+      </text>
+      <text id="2-|-10备份-8" font-family="PingFangSC-Semibold, PingFang SC" font-size="28" font-weight="500" fill="#FFFFFF">
+          <tspan x="217.14" y="1189">2 | 10</tspan>
+      </text>
+      <text id="材料供应" font-family="PingFangSC-Semibold, PingFang SC" font-size="36" font-weight="500" fill="#FFFFFF">
+          <tspan x="180" y="62">材料供应</tspan>
+      </text>
+      <text id="终端使用" font-family="PingFangSC-Semibold, PingFang SC" font-size="36" font-weight="500" fill="#FFFFFF">
+          <tspan x="1572" y="62">终端使用</tspan>
+      </text>
+      <text id="研发生产" font-family="PingFangSC-Semibold, PingFang SC" font-size="36" font-weight="500" fill="#FFFFFF">
+          <tspan x="736" y="62">研发生产</tspan>
+      </text>
+      <path d="M1112,0 L1378,0 C1379.10457,-2.02906125e-16 1380,0.8954305 1380,2 L1380,806 C1380,807.104569 1379.10457,808 1378,808 L1112,808 C1110.89543,808 1110,807.104569 1110,806 L1110,2 C1110,0.8954305 1110.89543,2.02906125e-16 1112,0 Z" id="Rectangle" fill="#38568F"></path>
+      <text id="器械流通" font-family="PingFangSC-Semibold, PingFang SC" font-size="36" font-weight="500" fill="#FFFFFF">
+          <tspan x="1173" y="62">器械流通</tspan>
+      </text>
+      <path d="M1123,98 L1367,98 C1367.55228,98 1368,98.4477153 1368,99 L1368,249 C1368,249.552285 1367.55228,250 1367,250 L1123,250 C1122.44772,250 1122,249.552285 1122,249 L1122,99 C1122,98.4477153 1122.44772,98 1123,98 Z" id="Rectangle" fill="#4775CC"></path>
+      <path d="M1135,110 L1355,110 C1355.55228,110 1356,110.447715 1356,111 L1356,237 C1356,237.552285 1355.55228,238 1355,238 L1135,238 C1134.44772,238 1134,237.552285 1134,237 L1134,111 C1134,110.447715 1134.44772,110 1135,110 Z" id="Rectangle" fill="#3F61B5"></path>
+      <text id="物流" font-family="PingFangSC-Semibold, PingFang SC" font-size="24" font-weight="500" fill="#FFFFFF">
+          <tspan x="1221" y="162">物流</tspan>
+      </text>
+      <text id="2-|-10" font-family="PingFangSC-Semibold, PingFang SC" font-size="28" font-weight="500" fill="#FFFFFF">
+          <tspan x="1210.14" y="207">2 | 10</tspan>
+      </text>
+      <g id="编组-2" transform="translate(508.000000, 0.000000)">
+          <path id="Line" d="M30,20.5 L44,27.5 L30,34.5 L30,28.5 L1,28.5 L1,26.5 L30,26.5 L30,20.5 Z" fill="#60D2FD" fill-rule="nonzero"></path>
+          <text id="供应" font-family="PingFangSC-Semibold, PingFang SC" font-size="14" font-weight="500" fill="#60D2FD">
+              <tspan x="9" y="15">供应</tspan>
+          </text>
+          <path id="Line" d="M14,32.5 L14,38.5 L43,38.5 L43,40.5 L14,40.5 L14,46.5 L0,39.5 L14,32.5 Z" fill="#F08E8F" fill-rule="nonzero"></path>
+          <text id="需求" font-family="PingFangSC-Semibold, PingFang SC" font-size="14" font-weight="500" fill="#F08E8F">
+              <tspan x="7" y="63">需求</tspan>
+          </text>
+      </g>
+      <g id="编组" transform="translate(1063.000000, 0.000000)">
+          <path id="Line" d="M30,20.5 L44,27.5 L30,34.5 L30,28.5 L1,28.5 L1,26.5 L30,26.5 L30,20.5 Z" fill="#60D2FD" fill-rule="nonzero"></path>
+          <text id="供应" font-family="PingFangSC-Semibold, PingFang SC" font-size="14" font-weight="500" fill="#60D2FD">
+              <tspan x="9" y="15">供应</tspan>
+          </text>
+          <path id="Line" d="M14,32.5 L14,38.5 L43,38.5 L43,40.5 L14,40.5 L14,46.5 L0,39.5 L14,32.5 Z" fill="#F08E8F" fill-rule="nonzero"></path>
+          <text id="需求" font-family="PingFangSC-Semibold, PingFang SC" font-size="14" font-weight="500" fill="#F08E8F">
+              <tspan x="7" y="63">需求</tspan>
+          </text>
+      </g>
+      <path d="M1123,262 L1367,262 C1367.55228,262 1368,262.447715 1368,263 L1368,413 C1368,413.552285 1367.55228,414 1367,414 L1123,414 C1122.44772,414 1122,413.552285 1122,413 L1122,263 C1122,262.447715 1122.44772,262 1123,262 Z" id="Rectangle" fill="#4775CC"></path>
+      <path d="M1135,274 L1355,274 C1355.55228,274 1356,274.447715 1356,275 L1356,401 C1356,401.552285 1355.55228,402 1355,402 L1135,402 C1134.44772,402 1134,401.552285 1134,401 L1134,275 C1134,274.447715 1134.44772,274 1135,274 Z" id="Rectangle" fill="#3F61B5"></path>
+      <text id="批发" font-family="PingFangSC-Semibold, PingFang SC" font-size="24" font-weight="500" fill="#FFFFFF">
+          <tspan x="1221" y="326">批发</tspan>
+      </text>
+      <text id="2-|-10" font-family="PingFangSC-Semibold, PingFang SC" font-size="28" font-weight="500" fill="#FFFFFF">
+          <tspan x="1210.14" y="371">2 | 10</tspan>
+      </text>
+      <path d="M1123,426 L1367,426 C1367.55228,426 1368,426.447715 1368,427 L1368,795 C1368,795.552285 1367.55228,796 1367,796 L1123,796 C1122.44772,796 1122,795.552285 1122,795 L1122,427 C1122,426.447715 1122.44772,426 1123,426 Z" id="Rectangle" fill="#4775CC"></path>
+      <path d="M1135,438 L1355,438 C1355.55228,438 1356,438.447715 1356,439 L1356,515 C1356,515.552285 1355.55228,516 1355,516 L1135,516 C1134.44772,516 1134,515.552285 1134,515 L1134,439 C1134,438.447715 1134.44772,438 1135,438 Z" id="Rectangle" fill="#3F61B5"></path>
+      <text id="零售" font-family="PingFangSC-Semibold, PingFang SC" font-size="24" font-weight="500" fill="#FFFFFF">
+          <tspan x="1221" y="486">零售</tspan>
+      </text>
+      <path d="M1135,528 L1355,528 C1355.55228,528 1356,528.447715 1356,529 L1356,649 C1356,649.552285 1355.55228,650 1355,650 L1135,650 C1134.44772,650 1134,649.552285 1134,649 L1134,529 C1134,528.447715 1134.44772,528 1135,528 Z" id="Rectangle备份-63" fill="#5889DC"></path>
+      <text id="药店" font-family="PingFangSC-Semibold, PingFang SC" font-size="24" font-weight="500" fill="#FFFFFF">
+          <tspan x="1221" y="574">药店</tspan>
+      </text>
+      <text id="2-|-10备份-34" font-family="PingFangSC-Semibold, PingFang SC" font-size="28" font-weight="500" fill="#FFFFFF">
+          <tspan x="1210.14" y="619">2 | 10</tspan>
+      </text>
+      <path d="M1135,662 L1355,662 C1355.55228,662 1356,662.447715 1356,663 L1356,783 C1356,783.552285 1355.55228,784 1355,784 L1135,784 C1134.44772,784 1134,783.552285 1134,783 L1134,663 C1134,662.447715 1134.44772,662 1135,662 Z" id="Rectangle备份-64" fill="#5889DC"></path>
+      <text id="电商" font-family="PingFangSC-Semibold, PingFang SC" font-size="24" font-weight="500" fill="#FFFFFF">
+          <tspan x="1221" y="708">电商</tspan>
+      </text>
+      <text id="2-|-10备份-35" font-family="PingFangSC-Semibold, PingFang SC" font-size="28" font-weight="500" fill="#FFFFFF">
+          <tspan x="1210.14" y="753">2 | 10</tspan>
+      </text>
+  </g>
+  
+    </svg>
+  </div>
+  <div class="cloudBlock"></div>
+  
+</body>
+<script>
+  axios
+.get("/users")
+.then(res => res.data)
+.then(users => console.log(users));
+  var obj = [
+    { name: '机构库', value: '9000+万' },
+    { name: '机构库', value: '9000+万' },
+    { name: '机构库', value: '9000+万' },
+    { name: '机构库', value: '9000+万' },
+    { name: '机构库', value: '9000+万' },
+    { name: '机构库', value: '9000+万' },
+    { name: '机构库', value: '9000+万' },
+    { name: '机构库', value: '9000+万' },
+    { name: '机构库', value: '9000+万' },
+    { name: '机构库', value: '9000+万' },
+    { name: '机构库', value: '9000+万' },
+    { name: '机构库', value: '9000+万' },
+    { name: '机构库', value: '9000+万' },
+    { name: '机构库', value: '9000+万' },
+    { name: '机构库', value: '9000+万' },
+  ];
+  var colors = ['#bbfcc8', '#bde8f9'];
+  obj.forEach(item => {
+    let diameter = Math.random() * 60 + 60;
+    var div = document.createElement('div');
+    div.className = "circle";//设置div的属性，如：class，title，id 等等
+  
+    div.style.height = diameter + 'px';
+    div.style.lineHeight = diameter + 'px';
+    div.style.width = diameter + 'px';
+    div.style.fontSize = diameter / 5 + 'px';
+    // alert(parseInt(Math.random() +1))
+
+    var subdiv = document.createElement('div');
+    subdiv.className = "circleText";//设置div的属性，如：class，title，id 等等
+    subdiv.innerHTML = item.name + item.value;
+    div.insertBefore(subdiv, div.lastChild)
+    div.style.background = colors[Math.round(Math.random())]
+
+
+    // div.style.background= '#bbfcc8'
+    var bo = document.querySelector('.cloudBlock'); //获取body对象.
+    //动态插入到body中
+    bo.insertBefore(div, bo.lastChild)
+  })
+
+  document.getElementById('gaofenzi').onclick= function(e){
+    console.log(e)
+    alert(12)
+  }
+
+
+</script>
+
+</html>

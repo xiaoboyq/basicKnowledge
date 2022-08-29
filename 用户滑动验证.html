@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>用户滑动验证</title>
+</head>
+<style>
+  .box {
+    position: relative;
+    width: 500px;
+    height: 300px;
+    margin: 0 auto;
+    background: url(./assets/1.jpg) no-repeat;
+    background-size: 100% 100%;
+  }
+  .img {
+    position: absolute;
+    top: 110px;
+    left: 0px;
+    width: 80px;
+    height: 80px;
+    background: url(./assets/1.jpg) no-repeat;
+    background-size: 500px 500px ;
+    z-index: 1;
+  }
+  .gap {
+    position: absolute;
+    top: 110px;
+    width: 80px;
+    height: 80px;
+    background-color: #fff;
+  }
+</style>
+<body>
+  <div class="box" id="box">
+    <!-- <div class="img" style="background-position: -221px center" > </div> -->
+    <div class="img" > </div>
+    <div class="gap" ></div>
+  </div>
+   <div style="text-align: center;">
+  <input type="range" value="0" class="move"/></div>
+</body>
+<script>
+  var box = document.querySelector(".box")
+  var img = document.querySelector(".img")
+  var gap = document.querySelector(".gap")
+  var move = document.querySelector(".move")
+
+  var boxWidth = box.offsetWidth;
+  var imgWidth = img.offsetWidth;
+  // 随机生成图片的缺口
+
+  // src='./assets/1.jpg
+  var imgKou = () => {
+    var left = ~~(Math.random() * (boxWidth - 2 * imgWidth)) + imgWidth;
+
+    gap.style.left = left + 'px';
+    img.style.backgroundPosition = -left + 'px'
+    return left;
+  }
+
+  var gapLeft = parseInt(imgKou())
+
+
+  move.addEventListener('input', function(e){
+    img.style.left = (e.target.value / 100) *(boxWidth - imgWidth) + 'px'
+    var imgLeft = parseInt(img.style.left);
+    if(Math.abs(imgLeft - gapLeft) < 2) {
+      // alert('成功')
+      console.log('成功')
+    }
+
+  })
+</script>
+</html>

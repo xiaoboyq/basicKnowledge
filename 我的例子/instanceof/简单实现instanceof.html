@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+
+<body>
+    <script type="text/javascript">
+        function instance_of(L, R) {//L 表示左表达式，R 表示右表达式
+            var O = R.prototype;
+            L = L.__proto__;
+            while (true) {
+                if (L === null)
+                    return false;
+                if (O === L) // 这里重点：当 O 严格等于 L 时，返回 true
+                    return true;
+                L = L.__proto__;
+            }
+        }
+        // 开始测试
+        var a = []
+        var b = {}
+
+        function Foo() { }
+        var c = new Foo()
+
+        function child() { }
+        function father() { }
+        child.prototype = new father()
+        var d = new child()
+
+        console.log(instance_of(a, Array)) // true
+        console.log(instance_of(b, Object)) // true
+        console.log(instance_of(b, Array)) // false
+        console.log(instance_of(a, Object)) // true
+        console.log(instance_of(c, Foo)) // true
+        console.log(instance_of(d, child)) // true
+        console.log(instance_of(d, father)) // true
+    </script>
+</body>
+
+</html>

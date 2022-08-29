@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>响应式实现-mvvm的雏形</title>
+</head>
+
+<body>
+  <div>mvvm的一个雏形： 有一个数据obj， 把这个数据定义成响应式defineReactive，加拦截, 在他发生变化的时候， 去更新视图层</div>
+  <div id="app"></div>
+  <script>
+    var obj = {};
+    // 对传入的obj 进行拦截
+    function defineReactive(obj, key, val) {
+      Object.defineProperty(obj, key, {  //  Object.defineProperty 监听 obj中key的改变
+        get() {
+          console.log('get' + val);
+          return val
+        },
+        set(newVal) {
+          if (newVal !== val) {
+            val = newVal
+            update();
+            console.log('set' + key + '|' + val)
+          }
+        }
+      })
+    }
+    // 响应式更新
+    function update() {
+      app.innerText = obj.foo
+    }
+
+    defineReactive(obj, 'foo', '') 
+    obj.foo = 123;
+
+    setInterval(()=>{ 
+      obj.foo = obj.foo+1;
+    },1000)
+  </script>
+</body>
+
+</html>

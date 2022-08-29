@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="canvas" width="1000" height="1000"></canvas>
+    
+</body>
+<script>
+    var canvas = document.getElementById('canvas');
+    if(canvas.getContext) {
+
+        // // 画出基本的方块
+        var context = canvas.getContext('2d');
+        // context.fillStyle="red";
+        // context.fillRect(10,10,50,50);
+
+        // context.fillStyle="rgba(0,0,255,0.5)";
+        // context.fillRect(30,30,50,50);
+
+        // context.clearRect(40,40, 10,10)
+
+       
+       // 路径
+       context.beginPath(); // 开始路径
+       context.arc(120,120,40,0,2*Math.PI,false);
+       context.moveTo(150,120)
+       context.arc(120,120, 30, 0, 2*Math.PI, false);
+
+
+       context.moveTo(120,120)
+       context.lineTo(120,90)
+
+       context.moveTo(120,120)
+       context.lineTo(100,120)
+
+       context.textAlign="center";
+       context.textBaseLine="middle"
+       context.fillText('12',120,90);
+
+       context.stroke();
+
+    }
+
+
+
+</script>
+</html>
+
+

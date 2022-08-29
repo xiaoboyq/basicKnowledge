@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>拖动</title>
+    <script type="text/javascript" src="js/jquery/jquery-1.8.2.min.js"></script>
+    <style type="text/css">
+        .draggable-obj {
+            position: absolute;
+            text-align: center;
+            font-size: 18px;
+        }
+
+        .draggable-obj img {
+            width: 100%;
+        }
+    </style>
+    <script type="text/javascript">
+        function initPages() {
+            var obj;
+            obj = document.getElementById("obj1");
+            drag(obj);
+            obj = document.getElementById("obj2");
+            drag(obj);
+        }
+        //为dom对象obj设置可拖动，且拖动后停留在释放鼠标处；
+        function drag(obj) {
+            obj.onmousedown = function (ev) {
+                var ev = ev || event;
+                var liw = ev.clientX - parseInt(getStyle(obj, 'left') == 'auto' ? '0' : getStyle(obj, 'left'));
+                var lit = ev.clientY - parseInt(getStyle(obj, 'top') == 'auto' ? '0' : getStyle(obj, 'top'));
+                if (obj.getCaptrue) {
+                    obj.getCaptrue();
+                }
+                document.onmousemove = function (ev) {
+                    var ev = ev || event;
+                    var L = ev.clientX - liw;
+                    var T = ev.clientY - lit;
+                    if (L < 100) {
+                        L = 0;
+                    }
+                    if (L > document.documentElement.clientWidth - obj.offsetWidth - 100) {
+                        L = (document.documentElement.clientWidth - obj.offsetWidth);
+                    }
+                    if (T < 100) {
+                        T = 0;
+                    }
+                    if (T > document.documentElement.clientHeight - obj.offsetHeight - 100) {
+                        T = (document.documentElement.clientHeight - obj.offsetHeight);
+                    }
+                    obj.style.left = L + 'px';
+                    obj.style.top = T + 'px';
+                    line1_2();//连线随动
+                }
+                document.onmouseup = function (ev) {
+                    document.onmousemove = document.onmouseup = null;
+                    if (obj.relaseCaptrue) {
+                        obj.relaseCaptrue();
+                    }
+                    line1_2();//连线随动
+                }
+                return false;
+            }
+        }
+        //获取对象的属性
+        function getStyle(obj, attr) {
+            if (obj.currentStyle) {
+                return obj.currentStyle[attr];
+            } else {
+                return getComputedStyle(obj, false)[attr];
+            }
+        }
+        //用svg实现连线——线段平滑有光泽
+        function drawLineBySVG(obj1, obj2) {
+            //check对象是否有效
+            if (!obj1 || !obj2)
+                return;
+            //计算线两头的坐标
+            var leftX = "";
+            var leftY = "";
+            var rightX = "";
+            var rightY = "";
+            leftX = $(obj1).position().left;
+            leftY = $(obj1).position().top + $(obj1).height() / 2;
+            rightX = $(obj2).position().left;
+            rightY = $(obj2).position().top + $(obj2).height() / 2;
+            if (leftX > rightX) {
+                if (leftX < rightX + $(obj2).width()) {
+                    leftX = leftX + $(obj1).width() / 2; rightX = rightX + $(obj2).width() / 2;
+                    if (($(obj1).position().top + $(obj1).height()) < ($(obj2).position().top)) {
+                        leftY = ($(obj1).position().top + $(obj1).height());
+                        rightY = ($(obj2).position().top);
+                    }
+                    if (($(obj2).position().top + $(obj2).height()) < ($(obj1).position().top)) {
+                        rightY = ($(obj2).position().top + $(obj2).height());
+                        leftY = ($(obj1).position().top);
+                    }
+                } else {
+                    rightX = rightX + $(obj2).width();
+                }
+            }
+            else {
+                if (rightX < leftX + $(obj1).width()) {
+                    leftX = leftX + $(obj1).width() / 2; rightX = rightX + $(obj2).width() / 2;
+                    if (($(obj1).position().top + $(obj1).height()) < ($(obj2).position().top)) {
+                        leftY = ($(obj1).position().top + $(obj1).height());
+                        rightY = ($(obj2).position().top);
+                    }
+                    if (($(obj2).position().top + $(obj2).height()) < ($(obj1).position().top)) {
+                        rightY = ($(obj2).position().top + $(obj2).height());
+                        leftY = ($(obj1).position().top);
+                    }
+                } else {
+                    leftX = leftX + $(obj1).width();
+                }
+            }
+            //构造svg path元素的path route字符串
+            var strPath = "M" + leftX + " " + leftY + " L" + rightX + " " + rightY + " Z";
+            console.log("path:", strPath);
+            //创建一个SVG path元素，
+            var svgLayer = document.getElementById('svgLayer');
+            var svgNS = "svg";
+            var svgObjPath;//= document.createElementNS(svgNS,"path");
+            var SVGDocument = document;//svgLayer.getSVGDocument();
+            var needAppendNewPathObj = false;
+            svgObjPath = SVGDocument.getElementById("path1_2");
+            if (!svgObjPath) {
+                svgObjPath = document.createElementNS(svgNS, "path");
+                needAppendNewPathObj = true;
+            }
+            svgObjPath.setAttribute("d", strPath);
+            svgObjPath.setAttribute("stroke", "#0000FF");
+            svgObjPath.setAttribute("stroke-width", "3");
+            if (needAppendNewPathObj) svgLayer.appendChild(svgObjPath);
+        }
+        function line1_2() {
+            var obj1 = document.getElementById("obj1");
+            var obj2 = document.getElementById("obj2");
+            drawLineBySVG(obj1, obj2);
+        }
+    </script>
+</head>
+
+<body>
+    <div id="container" style="height: 50%;width:100%">
+        <div id="canvas" style="width:100%;height:90%">
+            <div id="obj1" class="draggable-obj" style="left:100px;top:100px;">
+                <img src="images/qq2.jpg" />
+                1
+            </div>
+            <div id="obj2" class="draggable-obj" style="left:280px;top:100px;">
+                <img src="images/qq2.jpg" />
+                2
+            </div>
+            <svg id="svgLayer" width="100%" height="100%" style="position: absolute;z-index: -1">
+                <path id="path1_2" d="M100 150 L280 150 Z" style="stroke:blue;stroke-width:3" />
+            </svg>
+        </div>
+    </div>
+    <script>
+        initPages();
+    </script>
+</body>
+
+</html>

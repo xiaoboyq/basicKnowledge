@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>React 17上的合成事件</title>
+</head>
+
+<body>
+  <div id="root">
+    root
+    <div id="parent">
+      父亲
+      <div id="child"> 子</div>
+    </div>
+  </div>
+</body>
+
+<script>
+  // 17 事件委托的对象不在是document 而是挂载的容器了  1. 可以让一个页面可以使用多个react版本
+
+
+  // 与16版本区别， 1. 挂载在容器上 2. 跟节点分开监听捕获和冒泡【16是只监听document上的冒泡】；
+  let root = document.getElementById('root')
+  let parentDom = document.getElementById('parent')
+  let child = document.getElementById('child')
+  root.addEventListener('click', (event) => dispatchEvent(event, true), true) // true = useCapture
+  root.addEventListener('click', (event) => dispatchEvent(event, false))
+
+  function dispatchEvent(event, useCapture) {
+    const paths = [];
+    let current = event.target;
+    while (current) {
+      paths.push(current)
+      current = current.parentNode;
+    }
+    if (useCapture) {
+      for(let i = paths.length - 1; i >= 0; i--) {
+        let handler = paths[i].onClickCapture
+        handler&& handler()
+      }
+    } else {
+      for (let i = 0; i < paths.length; i++) {
+        let handler = paths[i].onClick
+        handler && handler()
+      }
+    }
+  }
+
+  parentDom.onClick = function () {
+    console.log('React parent 点击')
+  }
+  child.onClick = function () {
+    console.log('React child 点击')
+  }
+  parentDom.onClickCapture = function () {
+    console.log('React parent 捕获')
+  }
+
+  child.onClickCapture = function () {
+    console.log('React child 捕获')
+  }
+
+
+  // 原生事件
+  parentDom.addEventListener('click', function () {
+    console.log('parent 被点击 ');
+  })
+
+  child.addEventListener('click', function () {
+    console.log('child 被点击');
+  })
+  root.addEventListener('click', function () {
+    console.log('root 被点击');
+  })
+
+  parentDom.addEventListener('click', function () {
+    console.log('parent 被点击 捕获');
+  }, true)
+
+  child.addEventListener('click', function () {
+    console.log('child 被点击 捕获');
+  }, true)
+  root.addEventListener('click', function () {
+    console.log('root 被点击 捕获');
+  }, true)
+
+//  SyntheticEvent17.html:  React parent 捕获
+// SyntheticEvent17.html:63 React child 捕获
+// SyntheticEvent17.html:87 root 被点击 捕获
+// SyntheticEvent17.html:80 parent 被点击 捕获
+// SyntheticEvent17.html:84 child 被点击 捕获
+
+// SyntheticEvent17.html:73 child 被点击
+// SyntheticEvent17.html:69 parent 被点击 
+// SyntheticEvent17.html:56 React child 点击
+// SyntheticEvent17.html:53 React parent 点击
+// SyntheticEvent17.html:76 root 被点击
+
+// 注意： React事件都是挂载在root上的 捕获或者冒泡阶段 执行到root上时候才会被触发，
+//因此捕获阶段时候 冒泡阶段会冒泡到root上时候才会被触发。
+// 相同元素上的监听 会看代码的执行顺序。先注册的先执行
+
+// 总结： 先执行React捕获，再执行原生捕获， 接着执行原生事件的冒泡 最后执行React事件的冒泡
+</script>
+
+</html>

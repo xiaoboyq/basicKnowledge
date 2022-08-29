@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div style="background:blue;width:0;height: 20px;"></div>
+<button>开始</button>
+</body>
+
+<script>
+  let div = document.querySelector('div');
+  let button = document.querySelector('button');
+  let startTime = 0;
+
+  function progress(raftime) {
+      console.log('raftime:',raftime);
+      div.style.width = div.offsetWidth + 1 + 'px';
+      div.innerHTML = Math.floor(div.offsetWidth/3) + '%';
+      if (div.offsetWidth < 300) {
+          console.log(Date.now() - startTime + 'ms'); // 打印progress被调用的时间点
+          requestAnimationFrame(progress); // 时间差16ms 可以传参DOMHighResTimeStamp表示执行的时间点=performance.now()
+      // progress()  // 时间差只有1ms
+      }
+  }
+
+  button.onclick = function () {
+      div.style.width = 0;
+      startTime = Date.now();
+      // 浏览器会在每一帧渲染前执行这个方法
+      requestAnimationFrame(progress);
+      // progress()
+  };
+</script>
+</html>

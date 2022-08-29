@@ -1,0 +1,17 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script>
+        window.data = [1,2,3]
+    </script>
+</head>
+<body>
+    <p>frame page// frame和main页面嵌套 用来测试instanceof 使用instanceof检测数组不是一种可靠的方法</p>
+    <div>instanceof 操作符的问题在于，它假定只有一个全局执行环境。如果网页中包含
+        多个框架，那实际上就存在两个以上不同的全局执行环境，从而存在两个以上不同版
+        本的 Array 构造函数。如果你从一个框架向另一个框架传入一个数组，那么传入的
+        数组与在第二个框架中原生创建的数组分别具有各自不同的构造函数。</div>
+</body>

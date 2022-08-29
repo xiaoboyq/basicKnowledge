@@ -1,0 +1,160 @@
+v<!DOCTYPE html>
+<html lang="en">
+ 
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>手写板</title>
+</head>
+ 
+<body>
+  <div id="app">
+    <div class="sign-page">
+      <div class="canvas-box">
+        <div class="canvas" 
+          ontouchstart="methods.canvasTouchEvent(event,'canvasStart')"
+          ontouchmove="methods.canvasTouchEvent(event,'canvasMove')"
+          ontouchend="methods.canvasTouchEvent(event,'canvasEnd')">
+          <div class="title">请在该区域内工整书写您的签名</div>
+        </div>
+      </div>
+      <p class="clearCanvas" onclick="methods.saveOrClear('clear')">清 除</p>
+      <p class="saveCanvas" onclick="methods.saveOrClear('save')">保 存</p>
+    </div>
+  </div>
+  <script>
+ 
+    const temp = {
+      canvas: null, // 画布对象
+      ctx: null, // 上下文
+      stageInfo: null, // 返回canvas的大小及位置
+      isSign: false // 未签名提示
+    }
+ 
+    // 使用代理以响应变化(vue3响应式也是此原理)
+    const data = new Proxy(temp, {
+      set(target, property, value) {
+        if (property === 'isSign') {
+          document.querySelector('.title').style.display = value ? 'none' : 'block'
+        }
+        return Reflect.set(target, property, value);
+      },
+      get(target, key) {
+        return Reflect.get(target, key);
+      }
+    })
+ 
+    const methods = {
+      // 画布初始化事件
+      initCanvas(obj) {
+        data.canvas = document.createElement('canvas'); // 创建canvas
+        obj.el.appendChild(data.canvas); // 将创建的canvas追加到目标元素
+        data.ctx = data.canvas.getContext('2d'); // 获取画笔
+        data.canvas.width = obj.el.clientWidth;
+        data.canvas.height = obj.el.clientHeight;
+        data.ctx.fillStyle = '#ffffff'; // 填充颜色
+        data.ctx.strokeStyle = '#000000'; // 笔触色
+        data.ctx.fillRect(0, 0, data.canvas.width, data.canvas.height);
+        data.ctx.lineWidth = 2;  // 设置线的宽度
+        data.ctx.lineCap = 'round'; // 绘制圆形的结束线帽
+        data.stageInfo = data.canvas.getBoundingClientRect();
+      },
+      /*
+      *   画布touch相关事件处理
+      */
+      canvasTouchEvent(e, type) {
+        const ctx = data.ctx;
+        const postion = [e.changedTouches[0].pageX - data.stageInfo.left, e.changedTouches[0].pageY - data.stageInfo.top];
+        const handle = {
+          canvasStart: () => {
+            ctx.beginPath();
+            ctx.moveTo(...postion);
+          },
+          canvasMove: () => {
+            if (!e && !e.preventDefault) return;
+            e.preventDefault();
+            ctx.lineTo(...postion);
+            ctx.stroke();
+            data.isSign = true;
+          },
+          canvasEnd: () => ctx.closePath
+        }
+        handle[type]();
+      },
+ 
+      /*
+      *  清除和保存事件
+      */
+      saveOrClear(type) {
+        if (type === 'clear') {
+          data.ctx.clearRect(0, 0, data.canvas.width, data.canvas.height);
+          data.isSign = false;
+          return false;
+        }
+        if (data.isSign) {
+          const imgBase64 = data.canvas.toDataURL();
+          console.log(imgBase64);
+        }
+      }
+    }
+ 
+    window.onload = () => { methods.initCanvas({ el: document.querySelector('.canvas') }); }
+  </script>
+  <style>
+    .canvas-box {
+      width: calc(100% - 68px);
+      height: calc(100% - 180px);
+      margin-bottom: 38px;
+      position: relative;
+      border-radius: 6px;
+      background: #fff;
+      padding: 34px;
+ 
+    }
+ 
+    .canvas {
+      background: #fff;
+      height: 100%;
+      width: 100%;
+      border: 1px dashed #848588;
+      position: relative;
+      border-radius: 6px;
+    }
+ 
+    .saveCanvas,
+    .clearCanvas {
+      padding: 10px 0;
+      background: rgba(207, 225, 245, 1);
+      width: 45%;
+      text-align: center;
+      float: left;
+      color: #3F8EE8;
+    }
+ 
+    .saveCanvas {
+      margin-left: 10%;
+    }
+ 
+    .sign-page {
+      background: #EDF1F6;
+      width: calc(100% - 60px);
+      height: calc(100% - 96px);
+      padding: 58px 30px 38px;
+      position: fixed;
+      top: 0;
+      left: 0;
+    }
+ 
+    .title {
+      text-orientation: mixed;
+      font-size: 18px;
+      color: #A0ACBF;
+      position: absolute;
+      padding: 10%;
+      top: 0;
+      left: 0;
+    }
+  </style>
+</body>
+ 
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  .small:last-of-type {
+    color: red;
+  }
+
+  /* 选择所有不为空的pickle */
+  pickle:empty {
+    
+  }
+
+  /* 选择所有没有big类的pickle */
+  pickle:not(.big) {
+    color: blue
+  }
+/* 选择所有包含for属性的元素 */
+  [for] {   
+
+}
+  /* 选择所有包含for属性的且 for的开头是sm的元素 */
+  [for^="sm"] {  
+
+  }
+  /* 选择所有包含for属性的且 for的结尾是ato的元素 */
+  [for$="ato"] {
+
+  }
+  /* 选择所有包含for属性的且 for包含obb的元素 */
+  [for*="obb"] {
+
+  }
+  
+</style>
+<body>
+
+<div class="table">
+  <orange class="small" >firstOrange</orange>
+  <orange class="small" >lastOrange</orange>
+  <pickle />
+  <pickle class="big">not empty </pickle>
+  <apple class="small" >firstApple</apple>
+  <apple class="small" for="small">lastApple</apple>
+  <apple class="smmm"  for='smmm'>lastApple</apple>
+</div>
+</body>
+</html>

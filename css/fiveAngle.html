@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  body {
+    position: relative;
+    border: 10px solid grey;
+    padding: 100px;
+  }
+  /* 设置了top/left:0; 绝对定位元素会紧贴padding的边沿； 如果没有设置top/left； 默认为auto, 绝对定位会紧贴content的边沿 */
+  .pos {
+    position: absolute;
+    top: 0; 
+    left: 0; 
+    width: 10px;
+    height: 10px;
+    background-color: green;
+  }
+  .pentagon {
+    margin-top: 60px;
+    width: 54px;
+    position: relative;
+    border-width: 50px 18px 0;
+    border-style: solid;
+    border-color: #c5c5c5 transparent;
+  }
+
+  .pentagon::before {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    top: -85px;
+    left: -18px;
+    border-width: 0 45px 35px;
+    border-style: solid;
+    border-color: transparent transparent #c5c5c5;
+  }
+
+  /* .pentagon::after {
+    content: '';
+    width: 0;
+    height: 0;
+    position: absolute;
+    top: -100px;
+    left: 0;
+    border-width: 50px;
+    border-style: solid;
+    border-color: transparent transparent #c5c5c5 transparent;
+  } */
+</style>
+<body>
+  <div class="pos"></div>
+
+  <div class="pentagon"></div>
+  
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  html,body {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(antiquewhite,navajowhite);
+  }
+  .sea {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    background-color: whitesmoke ;
+    background-image: linear-gradient(
+      darkblue,
+      rgba(168, 159, 159, 0) 80%,
+      rgba(255, 255, 255, 0.5)
+    );
+    border-radius: 5px;
+    box-shadow: 0 2px 30px rgba(0,0,0,0.5);
+    overflow: hidden;
+  }
+  .sea .title {
+    color: white;
+    font-size: 24px;
+    font-family: serif;
+    text-align: center;
+    line-height: 250px;
+    text-transform: uppercase;
+    letter-spacing: 0.4em;
+    z-index: 1;
+    position: absolute;
+    width: 100%;
+  }
+
+  .sea .wave {
+    width: 500px;
+    height: 500px;
+    position: absolute;
+    background-color: deepskyblue;
+    top: -250px;
+    left: -100px;
+    filter: opacity(0.4);
+    border-radius: 43%;
+    animation: draft 5s linear infinite;
+    transform-origin: 50% 40%;
+  }
+
+  .sea .wave:nth-of-type(1) {
+    animation-duration: 5s;
+  }
+  .sea .wave:nth-of-type(2) {
+    animation-duration: 7s;
+  }
+  .sea .wave:nth-of-type(3) {
+    animation-duration: 9s;
+    background-color: res;
+    filter: opacity(0.1);
+  }
+
+
+  @keyframes draft {
+    from {
+      transform: rotate(360deg);
+    }
+    to {
+      transform: rotate(0deg);
+    }
+  }
+
+</style>
+<body>
+  <div class="sea">
+    <p class="title">title</p>
+    <span class="wave"></span>
+    <span class="wave"></span>
+    <span class="wave"></span>
+  </div>
+
+  
+</body>
+</html>

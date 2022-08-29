@@ -1,0 +1,71 @@
+(function (self) {
+  var __runtimeConfig = /* runtime-config */;
+  var cache = {};
+  var moduleList = [
+    /* template-module-list */
+  ]
+  var moduleDepIdList = [
+    /* template-module-dep-id-list */
+  ]
+
+  function require(id, parentId) {
+    const currentModuleId = parentId !== undefined ? moduleDepIdList[parentId][id] : id;
+    if (cache.hasOwnProperty(currentModuleId)) return cache[currentModuleId]
+    var module = { exports: {} }
+    var moduleFunc = moduleList[currentModuleId]
+    moduleFunc(
+      (function (parentModuleId) {
+        var closureRequire = function closureRequire(id) {
+          return require(id, parentModuleId)
+        }
+        closureRequire.ensure = function closureRequire(id) {
+          return require.ensure(id, parentModuleId)
+        }
+        return closureRequire
+      })(id), 
+      module, 
+      module.exports
+    );
+    cache[currentModuleId] = module.exports
+    return cache[currentModuleId] 
+  }
+
+  if(/* dynamic-import-status */) {
+    self["__dynamicRequire"] = function __dynamicRequire(chunkId, func) {
+      var chunkCache = cache[chunkId];
+      var resolve = chunkCache[0];
+      var module = {exports: {}};
+      moduleFunc(require, module, module.exports)
+      cache[chunkId] = module.exports;
+      resolve(cache[chunkId]);
+    }
+
+    require.ensure  = function requireEnsure(chunkId, parentModuleId) {
+      var chunkStatusSymbol = '__isPending';
+      var currentModuleId = moduleDepIdList[parentModuleId][chunkId];
+      var chunkPromise = cache[currentModuleId]
+  
+      if(chunkPromise === void 0) {
+        var $script =  document.createElement('script'); // jsonp
+        $script.src= __runtimeConfig.public + currentModuleId + ".js";
+        document.body.appendChild($script);
+  
+        var promise = new Promise(function(resolve){ // promise 会同步执行 里面没有异步内容 只是为了保存resolve 利用promise.then来传递参数
+          var chunkCache = [resolve]; // 保存当前额度resolve  
+          chunkCache[chunkStatusSymbol] = true; // 标记这个chunk已经存在， 如果第二次调用会直接取这个 不需要重新请求
+          cache[currentModuleId]= chunkCache;
+        })
+  
+        cache[currentModuleId].push(promise) // 保存当前的promise
+        return promise;
+      }
+  
+      if(chunkPromise[chunkStatusSymbol]) { // 如果这个chunk已经存在
+        return chunkPromise[1] // 返回这个promise
+       }
+
+      return chunkPromise;
+    }
+  }
+  require(moduleList.length - 1)
+})()

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body >
+  <div onclick="getAjaxError()">点击请求xml</div>
+  <img  src="./404.png"/>
+  由于网络请求异常不会事件冒泡，因此必须在捕获阶段将其捕捉到才行，但是这种方式虽然可以捕捉到网络请求的异常，但是无法判断 HTTP 的状态是 404 还是其他比如 500 等等，所以还需要配合服务端日志才进行排查分析才可以
+</body>
+<script type="text/javascript">
+  // 获取异步错误 setTimeout
+  window.onerror = function (msg, url, row, col, error) {
+    console.log('我知道异步错误了');
+    console.log({
+      msg, url, row, col, error
+    })
+    return true;
+  };
+  // setTimeout(() => {
+  //   error;
+  // })
+
+  // 获取网络请求的错误 但是无法获取请求的错误状态 400 500等
+  window.addEventListener('error', function (msg, url, row, col, error) {
+    console.log('我知道网络错误了【资源或者ajax请求】， 但是具体去和后端接口日志查看');
+    console.log({
+      msg, url, row, col, error
+    })
+  }, true) // 捕获阶段
+
+
+
+  // 获取ajax的错误信息
+  // function getAjaxError() {
+  //   var xhr =  new XMLHttpRequest();
+  //   xhr.open("GET",'http://xxx/asd', false); 
+  //   // async：规定应当对请求进行异步（true）或同步（false）处理；true是在等待服务器响应时执行其他脚本，当响应就绪后对响应进行处理；false是等待服务器响应再执行。
+  //   xhr.onreadystatechange = function() {
+  //     if(xhr.readyState === 4) { // 4 说明请求已经完成
+  //       if(xhr.status === 200 || xhr.status === 304) {
+  //         console.log('请求成功')
+  //       }
+  //     }
+  //   }
+  //   xhr.send()
+  // }
+
+
+  document.addEventListener('click', function(event) {
+    console.log('fetch请求失败')
+    event.stopPropagation()
+    getPromiseError(); // 此方法获取不到
+  })
+
+  // 
+  function getPromiseError() {
+    console.log('fetch请求失败')
+    fetch('http://lllxx/sad').then(res=>{
+      console.log('fecth 请求成功')
+    }).catch(err=>{
+      console.log('err', err)
+    })
+  }
+</script>
+<script src="./xxx.js">xxx</script>
+
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+</body>
+<script>
+  var throttle = function(fn, interval) {
+    let timer, firstTime = true;
+
+    return function() {
+      let _me = this;
+
+      if(firstTime) {
+        fn.apply(_me, arguments)
+        return firstTime =  false
+      };
+
+      if(timer) {
+        return false;
+      }
+
+      timer = setTimeout(function(){
+        clearTimeout(timer);
+        timer = null;
+        fn.apply(_me, arguments)
+      }, interval || 50)
+
+    }
+
+  }
+
+  window.onresize = throttle(function(){
+    console.log(123)
+  }, 1000)
+</script>
+</html>

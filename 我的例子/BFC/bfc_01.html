@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .float{
+        width: 200px;
+        height: 200px;
+        margin: 20px;
+        background: red;
+        float: left;
+        /* margin: 10px; */
+
+        /* will-change: opacity; */
+    }
+    .container{
+        height: 500px;
+        width: 400px;
+        background: #008c8c;
+        border: 10px solid green;
+        /* 在container里面创建BFC */ 
+        overflow: hidden;
+    }
+</style>
+<body>
+<div class="float">浮动元素</div>
+<div class="container">创建BFC的元素，它的边框盒不会与浮动元素重叠创建BFC的元素，它的边框盒不会与浮动元素重叠
+    创建BFC的元素，它的边框盒不会与浮动元素重叠创建BFC的元素，它的边框盒不会与浮动元素重叠创建BFC的元素，它的边框盒不会与浮动元素重叠创建BFC的元素，它的边框盒不会与浮动元素重叠
+    创建BFC的元素，它的边框盒不会与浮动元素重叠创建BFC的元素，它的边框盒不会与浮动元素重叠创建BFC的元素，它的边框盒不会与浮动元素重叠创建BFC的元素，它的边框盒不会与浮动元素重叠
+</div> 
+</body>
+</html>

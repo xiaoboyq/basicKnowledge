@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="App">
+    <input type="button" value="改变文本" @click="change">
+    <p ref="myP">{{str}}</p>
+</div>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    new Vue({
+        el:"#App",
+        data:{
+            str:"我之前很瘦的。"
+        },
+        methods:{
+            change(){
+                this.str = "现在超胖了！";
+                // 输出结果：我之前很瘦的。
+                console.log(this.$refs.myP.innerText)
+            }
+        }
+    })
+</script>
+</html>

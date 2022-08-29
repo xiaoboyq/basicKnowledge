@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .left {
+            float: left;
+            width: 100px;
+            height: 100vh;
+            background: red;
+        }
+        .right {
+            float: right;
+            width: 100px;
+            height: 100vh;
+            background: black;
+        }
+        .content {
+            background: greenyellow;
+            height: 100vh;
+            text-align: center;
+            margin-left: 100px;
+            margin-right: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div class="left"></div>
+    <div class="right"></div>
+    <div class="content">
+        三行布局中 左右的布局浮动要定义在内容的上方， 不然 后面的浮动会分行
+    </div>
+</body>
+</html>

@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>混入</title>
+  <style>
+    .active {
+      background-color: #ddd;
+    }
+
+    .message-box {
+      display: inline-block;
+      padding: 10px;
+      margin: 0 auto;
+    }
+
+    .success {
+      background-color: greenyellow;
+      color: #ffffff;
+    }
+
+    .warning {
+      background-color: #f66;
+      color: #ffffff;
+    }
+
+    .message-close {
+      display: inline-block;
+    }
+    .icon {
+      width: 1em;
+      height: 1em;
+      vertical-align: -0.15em;
+      fill: currentColor;
+      overflow: hidden;
+
+    }
+  </style>
+</head>
+<script src="https://at.alicdn.com/t/font_2262451_pgjujszaelm.js"></script>
+
+<body>
+  <div id="app">
+    <heading level='2' icon="gouwuche" :title="title">{{title}}</heading>
+
+    <h2 :title="title" >
+      <!-- 插值文本 -->
+        <svg class="icon">
+          <use xlink:href="#icon-gouwuche"></use>
+        </svg>
+      {{title}}
+    </h2>
+
+    <!-- 弹框组件 -->
+    <message :show.sync="show" class="success">
+      <!-- 具名插槽 -->
+      <!-- slotMssageProps表示上下文 作用域插槽-->
+      <template v-slot:title="slotMssageProps"><strong>{{slotMssageProps.title}}</strong></template>
+      <template v-slot:content>新增课程成功</template>
+    </message>
+    <!-- @update:变量名 = 赋值[子组件返回的值] -->
+    <!-- <message :show.sync="show" @update:show=""> 新增课程成功</message> -->
+
+    <message :show.sync="showWarn" class="warning">
+      <template v-slot:title><strong>提示</strong></template>
+      <template v-slot:content>请输入新增课程名称！</template>
+    </message>
+
+    <!-- 用总线来关闭所有弹框 -->
+    <p><button v-permission="'admin'" @click="$bus.$emit('message-close')">关闭所有弹框</button></p>
+    <!-- 新增课程 -->
+    <add-course v-model="course" @add-course='addCourse'></add-course>
+    <!-- <add-course :value="course" @input="course=$event" @add-course='addCourse'></add-course> -->
+    <!-- $event传递出来的参数   v-model="course"相当于 :value="course" @input="course=$event" -->
+
+    <!-- 修改价格 -->
+    <p>
+      <input type="text" v-model.number="price" />
+      <button @click="updatePrice">批量修改价格</button>
+    </p>
+
+
+    <!-- 课程列表 -->
+    <courses-list :courses='courses'></courses-list>
+
+    <!-- 监听 -->
+    <div>总课程 {{totalCount}}</div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    // 模拟一个权限
+    const role = 'user'; // user | admin
+
+
+    // 标题组件
+    Vue.component('heading', {
+      props: {
+        level: {
+          type: String,
+          required: true
+        }, 
+        title: {
+          type: String,
+          defalut: ''
+        },
+        icon: {
+          type: String
+        }
+      },
+
+      // <svg class="icon">
+      //     <use xlink:href="#icon-gouwuche"></use>
+      //   </svg>
+
+      render(h) { // h 即 creatElement函数
+        let childrend = [];
+        if(this.icon) {
+          childrend.push(h(
+            'svg',
+            { class: 'icon'},
+            [h('use',{attrs: {'xlink:href':'#icon-'+this.icon}})]
+            ))
+        }
+
+
+        // 拼接子元素 把图标和子节点拼接
+        childrend =   childrend.concat(this.$slots.default)
+
+        return h(
+          'h' + this.level,  // 参数1  tagname
+          {attrs: { title: this.title}}, // 参数2 属性
+          childrend, // 参数3 一个数组  子节点vnode数组
+          
+        )
+
+      }
+    })
+
+
+// 混入  vue中提供了一种混合机制--mixins，用来更高效的实现组件内容的复用
+const helloMixin = {
+  created () {
+    // this 表示组件实例
+    this.hello();
+  },
+  methods: {
+    hello() {
+      console.log('测试mixin')
+    }
+  },
+}
+
+
+
+    // 弹框组件
+    Vue.component('message', {
+      props: ['show'],
+      mixins: [helloMixin],
+      template: `
+      <div class="message-box" v-if="show">
+        <!-- 通过slot获取其内容 -->
+        <slot name="title" title="来自message的标题"></slot>
+        <slot name="content"></slot>
+
+        <span class="message-close" @click="$emit('update:show',false)">X</span>
+      </div>
+        `,
+      mounted() {
+        this.$bus.$on('message-close', () => { // 总线来控制所有的弹框关闭
+          this.$emit('update:show', false)
+        })
+      }
+    })
+
+
+    // 实现自定义指令
+    Vue.directive('focus',{
+      inserted(el){ // inserted 钩子函数
+       el.focus()
+      }
+    })
+
+    // 自定义指令来控制权限
+    Vue.directive('permission', {
+      inserted(el,binding) {
+        if(role !== binding.value) {
+          // 如果指定用户角色和当前用户角色不匹配则删除当前指令绑定的元素
+          el.parentElement.removeChild(el)
+        }
+      }
+    })
+
+    // 新增课程组件
+    Vue.component('add-course', {
+      props: ['value'],
+      template: `
+      <div>
+        <!-- 用户输入 双向绑定 -->
+        <p>
+          <input type="text" :value="value" @input="onInput" v-focus  v-on:keydown.enter="addCourse" >
+          <button @click="addCourse">新增</button>
+        </p>
+      </div>
+      `,
+      methods: {
+        addCourse() {
+          this.$emit('add-course', this.course)
+        },
+        onInput(e) {
+          this.$emit('input', e.target.value)
+        }
+      },
+
+
+      mounted () {
+        // dom操作获取焦点 ref='inp'
+        // this.$refs.inp.focus();
+      },
+    })
+
+    // 课程列表组件  可单独提出
+    Vue.component('courses-list', {
+      data() {
+        return {
+          selectItem: ''
+        }
+      },
+      props: {
+        courses: {
+          type: Array,
+          default: []
+        }
+      },
+
+      template: `
+        <div>
+          <p v-if="courses.length == 0">没有数据可以选择</p>
+            <!-- 列表渲染 -->
+            <!-- 动态class -->
+          <!-- <div v-for="item in courses" :key="item.name" :class="{active: selectItem === item}" @click="selectItem= item">
+            {{ item }}
+          </div> -->
+          <div class="courses" v-else>
+            <!-- style -->
+            <div v-for="item in courses" :key="item.name" :style="{backgroundColor: selectItem===item.name?'#ddd': 'transparent'}" @click="selectItem= item.name">
+              {{ item.name }} - ¥{{item.price}}
+            </div>
+          </div>
+          <!-- 计算属性 -->
+          <!-- <div>课程总数：{{total}}</div> -->
+        </div>`
+    })
+
+    function getCourses() {
+      return new Promise(reslove => {
+        setTimeout(() => {
+          reslove([{ name: 'web全栈' }, { name: 'web高级' }])
+        }, 2000)
+      })
+    }
+
+
+// 总线
+Vue.prototype.$bus = new Vue();
+
+
+//  创建vue实例要放在组件后面，先定义组件在创建vue
+
+// 创建vue实例
+const app = new Vue({
+  el: '#app',
+  data() {
+    return {
+      title: '课程列表',
+      course: '',
+      totalCount: 0,
+      show: false,
+      showWarn: false,
+      courses: [],
+      price: 0,
+    }
+  },
+
+  async created() { // 组件的创建钩子
+    // created时 组件实例已经创建，由于未挂载，dom不存在
+    const courses = await getCourses();
+    this.courses = courses;
+
+    // 批量更新一下课程的价格
+    this.updatePrice()
+  },
+
+  mounted() {
+    // mounted dom已经存在
+  },
+  methods: {
+    addCourse() {
+      if (this.course) {
+        this.courses.push({ name: this.course });
+        this.course = '',
+          // 显示弹框
+          this.show = true
+      } else {
+        this.showWarn = true
+      }
+    },
+    updatePrice() {
+      this.courses.forEach(v => {
+        // v.price = this.price; 没用 新增加的属性动态无法改变
+        Vue.set(v, "price", this.price)
+        // this.$set(v,"price", this.price) // 同上 写法不同
+      })
+    }
+  },
+  // 计算属性
+  computed: {
+    // 计算属性具有缓存性， 当值不变时，不会重新渲染
+    total() {
+      return this.courses.length + '门'
+    }
+  },
+
+  // 默认情况下watch 初始化不执行的
+  // watch: {
+  //   courses(newValue, oldValue) { // 当courses变化时候会调用 监听courses的变化 一开始不执行
+  //     this.totalCount = newValue.length + '门'
+  //   }
+  // },
+
+  //  带选项的watch 可以立即执行
+  watch: {
+    courses: {
+      immediate: true, // 立即执行
+      deep: true,  // 多层对象的改变
+      handler(newValue, oldValue) {
+        this.totalCount = newValue.length + '门'
+      }
+    }
+  },
+
+  // watch 适用于 一个值变化了 影响多个值；   computed 适用于 多个值影响一个值的场景
+})
+
+
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<body>
+		<div class="container" style="height: 520px">
+			<div data-force="30" class="layer block" style="left: 14.5%; top: 0; width: 37%">
+				<div class="layer title">List A</div>
+				<div id="foo" class="block__list block__list_words">
+					<div>1aaaбегемот测试</div>
+					<div>2корм</div>
+					<div>3антон</div>
+					<div>4сало</div>
+					<div>5железосталь</div>
+					<div>6валик</div>
+					<div>7кровать</div>
+					<div>8краб</div>
+				</div>
+			</div>
+		</div>
+		<script src="./sortable.min.js"></script>
+		<script>
+			console.log(document.getElementById('foo'))
+			Sortable.create(document.getElementById('foo'), {
+				animation: 150,
+				store: {//缓存到localStorage
+					get: function(sortable) {
+						var order = localStorage.getItem(sortable.options.group);
+						return order ? order.split('|') : [];
+					},
+					set: function(sortable) {
+						var order = sortable.toArray();
+						localStorage.setItem(sortable.options.group, order.join('|'));
+					}
+				},
+				onAdd: function(evt) {
+					console.log('onAdd.foo:', [evt.item, evt.from]);
+				},
+				onUpdate: function(evt) {
+					console.log('onUpdate.foo:', [evt.item, evt.from]);
+				},
+				onRemove: function(evt) {
+					console.log('onRemove.foo:', [evt.item, evt.from]);
+				},
+				onStart: function(evt) {
+					console.log('onStart.foo:', [evt.item, evt.from]);
+				},
+				onSort: function(evt) {
+					console.log('onStart.foo:', [evt.item, evt.from]);
+				},
+				onEnd: function(evt) {
+					console.log('onEnd.foo:', [evt.item, evt.from]);
+				}
+			});
+		</script>
+	
+</body>
+</html>

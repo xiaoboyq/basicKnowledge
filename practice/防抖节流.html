@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div {
+            width: 500px;
+            height: 5000px;
+            background: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        123
+    </div>
+    <script>
+        // 节流 隔一段时间触发一次   无论你调用多少次， 函数都是1000毫秒执行一次  就是指连续触发事件但是在 n 秒中只执行一次函数。节流会稀释函数的执行频率。
+        // 节流 时间戳版本
+        const throttle = (func, wait = 1000) => {
+            let lastTime = 0;
+            return (...args) => {
+                let now = new Date().getTime();
+                if (now - lastTime > wait) {
+                    func.apply(this, args);
+                    lastTime = now;
+                }
+            }
+        }
+        // search =  throttle(self.search, 300);
+        // search()
+
+        // 节流
+        const throttle = (func, wait = 1000) => {
+            let lastTime = 0
+            return (...args) => {
+                let nowTime = new Date().getTime();
+                if (nowTime - lastTime >= wait) {
+                    func.apply(this.args);
+                    lastTime = nowTime // 1s  2s 
+                }
+            }
+        }
+
+        const throttle1 = (func, wait = 0) => {
+            let timeout = null;
+            return (...args) => {
+                if (!timeout) {
+                    timeout = setTimeout(() => {
+                        timeout = null;
+                        func.apply(this, args)
+                    }, wait) // 1s  2s 3s
+                }
+            }
+        }
+
+        // 或者 
+        // function throttle(func, wait) {
+        //     let previous = 0;
+        //     return function () {
+        //         let now = Date.now();
+        //         let context = this;
+        //         let args = arguments;
+        //         if (now - previous > wait) {
+        //             func.apply(context, args);
+        //             previous = now;
+        //         }
+        //     }
+        // }
+
+        // // 节流 定时器版
+        // function throttle(func, wait) {
+        //     let timeout;
+        //     return function () {
+        //         let context = this;
+        //         let args = arguments;
+        //         if (!timeout) {
+        //             timeout = setTimeout(() => {
+        //                 timeout = null;
+        //                 func.apply(context, args)
+        //             }, wait)
+        //         }
+
+        //     }
+        // }
+
+        // 一般我们希望开始和结束的时候都执行， 结合俩者
+        var throttle = function (func, delay) {
+            var timer = null; // 定时器
+            var startTime = Date.now();  //设置开始时间
+            return function () {
+                var curTime = Date.now(); // 当前的时间
+                var remaining = delay - (curTime - startTime);  //剩余时间
+                var context = this;
+                var args = arguments;
+                clearTimeout(timer);
+                if (remaining <= 0) {      // 第一次触发立即执行
+                    func.apply(context, args);
+                    startTime = Date.now();
+                } else {
+                    timer = setTimeout(func, remaining);   //取消当前计数器并计算新的remaining
+                }
+            }
+        }
+        //处理函数
+        function Top() {
+            var sTOP = document.body.scrollTop || document.documentElement.scrollTop;
+            console.log(sTOP);
+        }
+
+        // 滚动事件
+        window.addEventListener('scroll', throttle(Top, 1000));
+
+
+
+
+
+        times = null 只是将定时器的指向改为null，并没有在内存中清除定时器，定时器还是会如期运行；如同在debounce函数中将times = null并不能达到防抖的目的，
+        因为每个定时器都只是将内存地址指向了null，而每个定时器都将会执行一遍.
+            而clearTimeout(times)会将定时器从内存中清除掉.
+
+
+                防抖是将多次执行变为最后一次执行，节流是将多次执行变为每隔一段时间执行
+
+        防抖只有定时器的方法， 节流有定时器和时间戳的方法， 防抖如果用此文中的时间戳方法， 会立即执行一次，达不到防抖的效果； 防抖是将多次执行变为最后一次执行。
+        节流的定时器是后执行， 第一次不立即执行， 时间戳是第一次立即执行，
+        其实时间戳版和定时器版的节流函数的区别就是，时间戳版的函数触发是在时间段内开始的时候，而定时器版的函数触发是在时间段内结束的时候。
+        // 防抖 事件结束触发  [用户输入 --》防抖 输入完成后结束执行] 用户停止输入自发350毫秒 再触发
+        // 所谓防抖，就是指触发事件后在 n 秒内函数只能执行一次，如果在 n 秒内又触发了事件，则会重新计算函数执行时间。
+
+        //  非立即执行版本 wait 秒后执行
+        function debounce(func, wait) {
+            let timeout;
+            return function () {
+                let context = this;
+                let args = arguments;
+                if (timeout) clearTimeout(timeout);
+                timeout = setTimeout(() => {
+                    func.apply(context, args)
+                }, wait);
+            }
+        }
+
+
+
+        let i = 1;
+        window.addEventListener('scroll',
+            throttle(() => {
+                console.log(i);
+                i++;
+            })
+        )
+    // 参考链接：https://www.jianshu.com/p/c8b86b09daf0
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>图片懒加载</title>
+</head>
+
+<body>
+  <div style="height: 800px; border: 1px solid red">123</div>
+  <ul>
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+    <li>4</li>
+
+    <li>5
+    </li>
+    <li>
+      <img id='app' alt="" src="./assets/2.png" data-src="./assets/bg.png">
+    </li>
+    <li>
+      <img id='app' alt="" src="./assets/2.png" data-src="./assets/1.png">
+    </li>
+    <li>
+      <img id='app' alt="" src="./assets/2.png" data-src="./assets/3.png">
+    </li>
+    <li>
+      <img id='app' alt="" src="./assets/2.png" data-src="./assets/2.png">
+    </li>
+    <li>6</li>
+    <li>7</li>
+    <li>8</li>
+    <li>9</li>
+    <li>10</li>
+  </ul>
+
+  <script>
+    // 获取DOM
+    // var img = document.getElementById('app')
+    var imgs = document.querySelectorAll('[data-src]');
+    // 实例化 IntersectionObserver
+    var observer = new IntersectionObserver(arr => {
+      // 是否进入 返回值是一个布尔值
+      arr.forEach(entry => {
+        if(entry.isIntersecting) {
+            entry.target.src = entry.target.dataset.src
+          entry.target.onload = function () {
+            console.log('图片加载完毕');
+          }
+          entry.onerrer = function () {
+            console.log('图片加载失败')
+          }
+          // 不再监听  只监听一次
+          observer.unobserve(entry.target)
+        }
+      })
+      // 返回目标元素出现在可视区的比例
+      // console.log(arr[0].isIntersectionRatio)
+      // 图片进入可视区域内(注意 rootMargin 的值)
+      // if (arr[0].isIntersecting) {
+      //   arr[0].target.src = arr[2].target.dataset.src
+      //   // img.src = './assets/1.png'
+      //   // // 图片加载错误的回调(优化用户体验)
+      //   // img.onorrer = function () {
+      //   //   console.log('图片加载失败')
+      //   //   img.src = '默认图片地址'
+      //   // }
+      //   // // 图片加载后的回调
+      //   arr[0].target.onload = function () {
+      //     console.log('图片加载完毕');
+      //   }
+      //   // 不再监听  只监听一次
+      //   observer.unobserve(arr[0].target)
+      // }
+      // rootMargin 提前 100px 来发请求获取图片，因为发请求也是需要时间的
+    }, { rootMargin: '-50px' })
+    // 调用函数，开始监听
+
+    for (let i = 0; i < imgs.length; i++) {
+      observer.observe(imgs[i])
+    }
+  </script>
+</body>
+
+</html>

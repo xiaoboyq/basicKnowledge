@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+  .wrapper div {
+  height: 200px;
+}
+
+.left {
+  float: left;
+  width: 200px;
+  background: gray;
+}
+
+.right {
+  float: right;
+  width: 200px;
+  background: gray;
+}
+
+.main {
+  /* 中间栏创建 BFC */
+  /* 由于 盒子的 margin box 的左边和包含块 border box 的左边相接触 */
+  /* 同时 BFC 区域不会和浮动盒重叠，所以宽度会自适应 */
+  overflow: auto;
+  background: cyan;
+}
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="left"></div>
+    <div class="right"></div>
+    <div class="main"> 位置不同 页面展示也不一样</div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Proxy</title>
+    <!-- <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script> -->
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+</head>
+
+
+<body>
+    姓名<input type="text" name=username>
+    <br>
+    年龄 <input type="text" name=age>
+    <br>
+    <button>涨一岁</button>
+</body>
+<script>
+    var data = {
+        username: 'frank',
+        age: 20
+    }
+
+    // 代理 
+    var proxy = new Proxy(data, {
+        set: function (obj, prop, value) {  
+            console.log(obj)
+            console.log('prop:'+prop)
+            console.log('value:'+value)
+            obj[prop] = value+1
+            $('input[name=' + prop + ']').val(value+1) 
+        },
+        // get: function (obj, prop, value) {
+        //     obj[prop] = value
+        //     $('input[name=' + prop + ']').val(value)
+        // }
+    })
+
+    //  var proxy = new Proxy(data, {
+    //      set: function(obj) {
+    //      }
+    //  })
+
+    $('input[name=username]').val(data.username).on('input', function () {
+        data.username = parseInt(this.value, 10)
+    })
+
+    $('input[name=age]').val(data.age).on('input', function () {
+        data.age = parseInt(this.value, 10)
+    })
+
+
+    $('button').on('click', function () {
+        proxy.age += 1
+    })
+</script>
+
+</html>

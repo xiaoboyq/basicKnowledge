@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>扇形</title>
+</head>
+<style>
+
+.circle {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  background-color: turquoise;
+  border-radius: 50%;
+  /* border: 1px solid red; */
+  overflow: hidden;
+}
+
+.rect {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 50%;
+  top: 50%;
+  background-color: red;
+  transform-origin: left top;
+  animation: ReactRotate 3s linear infinite;
+}
+
+@keyframes ReactRotate {
+  0% {   transform: rotate(0deg) skewY(30deg); }
+  100% {   transform: rotate(360deg) skewY(30deg); }
+}
+</style>
+<body>
+  <div class="circle">
+    <div class="rect"></div>
+  </div>
+</body>
+</html>

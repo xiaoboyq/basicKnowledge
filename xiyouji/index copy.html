@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        html, body, .main {
+            height: 100%;
+        }
+
+        li, ul {
+            list-style: none;
+        }
+        .content {
+            position: absolute;
+            width: 950px;
+            left: 50%;
+            margin-left: -475px;
+            bottom: 300px;
+        }
+
+        .content > ul:after {
+            display: block;
+            content: "";
+            clear: both;
+        }
+
+        .content > ul > li {
+            width: 200px;
+            height: 180px;
+            float: left;
+            overflow: hidden;
+        }
+
+        .content > ul > li:last-child {
+            margin-right: 0;
+        }
+
+        .content > ul > li > div {
+            width: 1600px;
+            height: 180px;
+            font-size: 0;
+            animation-name: dong;
+            animation-duration: 1s;
+            animation-iteration-count: infinite;
+            /*animation-direction: alternate;*/
+            /*animation-timing-function: linear;*/
+            animation-timing-function: steps(8);
+        }
+
+        .content > ul > li > div > img {
+            width: 100%;
+        }
+
+        /*定义动画*/
+        @keyframes dong {
+            from {
+                margin-left: 0;
+            }
+            to {
+                margin-left: -1600px;
+            }
+        }
+
+        .main {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .main > .bg {
+            position: relative;
+            width: 3920px;
+            height: 100%;
+            background: url("./image/bg.jpeg") repeat-x;
+
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+            animation-duration: 30s;
+            animation-name: bg;
+        }
+
+        @keyframes bg {
+            from {
+                margin-left: -1920px;
+            }
+            to {
+                margin-left: 0;
+            }
+        }
+
+        .content > ul > li:nth-child(3) {
+            /*background-color: orange;*/
+            margin-top: -45px;
+        }
+    </style>
+</head>
+<body>
+<div class="main">
+    <div class="bg">
+        <!--<img src="../" alt="">-->
+    </div>
+</div>
+<div class="content">
+    <ul>
+        <li>
+            <div><img src="./image/wukong.png" alt=""></div>
+        </li>
+        <li>
+            <div><img src="./image/bajie.png" alt=""></div>
+        </li>
+        <li>
+            <div><img src="./image/tangsheng.png" alt=""></div>
+        </li>
+        <li>
+            <div><img src="./image/shasheng.png" alt=""></div>
+        </li>
+    </ul>
+</div>
+
+<div class="content2">
+    <ul>
+        <li>
+            <!-- 14400 × 460 -->
+            <div><img src="./image/test.png" alt=""></div>
+        </li>
+    </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+<style>
+  body {
+    display: flex;
+    justify-content: space-between;
+    width: 500px;
+  }
+  body > div {
+    width: 100px;
+    height: 100px;
+    /* padding: 10px; */
+    margin-right: 10px;
+    color: #fff;
+    background: #000;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+  </style></head>
+<body>
+  <div>6天</div>
+  <div>154小时</div>
+  <div>9252分钟</div>
+  <div>555138秒</div>
+
+<script>
+  let defaultTime = new Date('2022-3-17 00:00:00');
+  let doms = document.getElementsByTagName('div')
+
+  function getExpirationTime() {
+    let current = new Date();
+    let currentTime = (defaultTime- current) / 1000; // 时间戳相减得到单位为秒的时间差
+    let day = parseInt(currentTime/ 60 / 60 / 24) ; // 得到相差的时间 天数
+    // currentTime = currentTime - day;
+    let hours =  parseInt(currentTime/ 60 / 60 % 24);
+    let minute =  parseInt(currentTime/ 60 % 60) ;
+    let second =  parseInt(currentTime % 60);
+    doms[0].innerHTML = day + '天';
+    doms[1].innerHTML = hours+ '小时';
+    doms[2].innerHTML = minute+ '分钟';
+    doms[3].innerHTML = second+ '秒';
+  }
+
+  getExpirationTime()
+  setInterval(getExpirationTime, 1000);
+
+  </script>
+</body>
+
+</html>

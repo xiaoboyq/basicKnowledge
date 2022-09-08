@@ -54,7 +54,24 @@ error;
   }, true)
 ```
 
+# 静态资源加载异常
+在出现静态资源加载异常的元素的 onerror 方法中处理。
+资源加载异常触发的error事件不会冒泡，因此使window.addEventListener('error', cb, true) 在事件捕获阶段进行捕获。
+第一种方式侵入性太强，不够优雅，目前主流方案均采用第二种方式进行监控：
+
+
+
 
 # Promise 错误
+
+ 1. .catch() 方式
+ 2. rejected 【then的第二个参数】
+ 3. 全局捕获示例：unhandledrejection 
+ window.addEventListener('unhandledrejection')
+
+
+# 前端页面崩溃监测
+
+https://note.youdao.com/s/8KsuVgmB
 
 

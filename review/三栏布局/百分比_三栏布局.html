@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+
+body {
+  /* 去除inline-block 之间的间隙问题
+  对于内联元素和内联块元素的使用存在一个问题，即在显示源代码上存在的换行符时会形成空白，
+  */
+  font-size: 0; 
+}
+ body > div {
+    display: inline-block;
+    height: 100px;
+    padding: 0;
+    margin: 0;
+    font-size: 1rem;
+    vertical-align: middle;
+  }
+  .left {
+    width: 200px;
+    background-color: aquamarine;
+  }
+  .right {
+    width: 200px;
+    background-color: rosybrown;
+  }
+  .content {
+    width: calc(100% - 400px);
+    background-color: aqua;
+  }
+</style>
+<body>
+  <div class="left">123</div>
+  <div class="content">
+    <div>121233</div>
+    <div>121233</div>
+    <div>121233</div>
+  </div>
+  <div class="right">123</div>
+</body>
+</html>

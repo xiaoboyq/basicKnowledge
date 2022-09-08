@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  .header {
+    height: 200px;
+    width: 100px;
+    background-color: aquamarine;
+  }
+  .fixedTop {
+    width: 100%;
+    height: 40px;
+    border: 2px solid red;
+  }
+  .fixedTopSure {
+    position: fixed;
+    top: 0;
+    left: 0;
+  }
+  .content {
+    height: 180vh;
+    width: 100vw;
+    background-color: aqua;
+  }
+</style>
+<body>
+  <div class="header">这是一个头部的位置</div>
+  <div class="topContainer">
+      <div class="fixedTop">这是一个需要吸顶的东西</div>
+  </div>
+
+  <div class="content">
+    <h2>吸顶实现： 监听滚动 1. getBoundingClientRect().top   </h2>
+    <h2>吸顶实现： 2. intersectionObserver</h2>
+    <h2>吸顶实现： 3. position: sticky</h2>
+
+    <h3>注意： 三者都是监听父亲节点的变动， 子元素吸顶</h3>
+    
+    intersectionObserver本以为是最优解，实现时发现效果并不好。
+    因为这个API的优先级比较低，每次都要等待页面渲染完成之后才能再次响应，所以在快速滑动的时候会出现抖动。
+    <pre>
+    流畅度：CSS >= scroll > intersectionObserver
+    性能：CSS>= intersectionObserver >= scroll
+    兼容性：scroll > intersectionObserver > CSS
+    </pre>
+<!-- 原文链接：https://blog.csdn.net/weixin_44477873/article/details/116305188 -->
+  </div>
+</body>
+<script>
+  let dom = document.querySelector('.fixedTop')
+  let topContainer = document.querySelector('.topContainer')
+  var stickyTop = false
+
+  let oberser = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      console.log('entry.isIntersecting', entry.isIntersecting, stickyTop)
+      if(!entry.isIntersecting) {
+        stickyTop = true
+        dom.classList.add('fixedTopSure')
+        // dom.setAttribute('style', "position: fixed; top: 0; left: 0")
+      } else {
+        stickyTop = false
+        dom.classList.remove('fixedTopSure')
+        // dom.setAttribute('style', "position: static")
+      }
+
+    })
+  }, {
+    rootMargin: '-48px'
+  })
+  oberser.observe(topContainer)
+
+</script>
+</html>

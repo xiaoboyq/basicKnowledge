@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  .main {
+    height: 40px;
+  }
+  .imgBlock {
+    column-gap: 10px; 
+    column-count: 4;
+  }
+
+  img {
+    /* width: 100%; */
+    /* height: 100%; */
+    width: calc(100vw / 4 - 5px);
+    /* float: left; */
+    /* vertical-align: top; */
+  }
+</style>
+<body>
+  <div class="main"> 这是一个图片展示</div>
+  <div class="imgBlock">
+    <img src="./images/loading.gif" data-src="./images/1.jpeg" alt=""/>
+    <img src="./images/loading.gif" data-src="./images/2.jpeg" alt=""/>
+    <img src="./images/loading.gif" data-src="./images/3.jpeg" alt=""/>
+    <img src="./images/loading.gif" data-src="./images/4.jpeg" alt=""/>
+    <img src="./images/loading.gif" data-src="./images/5.jpeg" alt=""/>
+    <img src="./images/loading.gif" data-src="./images/6.jpeg" alt=""/>
+    <img src="./images/loading.gif" data-src="./images/7.jpeg" alt=""/>
+    <img src="./images/loading.gif" data-src="./images/8.jpeg" alt=""/>
+    <img src="./images/loading.gif" data-src="./images/9.jpeg" alt=""/>
+    <img src="./images/loading.gif" data-src="./images/10.jpeg" alt=""/>
+    <img src="./images/loading.gif" data-src="./images/11.jpeg" alt=""/>
+    <img src="./images/loading.gif" data-src="./images/12.jpeg" alt=""/>
+    <img src="./images/loading.gif" data-src="./images/13.jpeg" alt=""/>
+    <img src="./images/loading.gif" data-src="./images/14.jpeg" alt=""/>
+    <img src="./images/loading.gif" data-src="./images/15.jpeg" alt=""/>
+    <img src="./images/loading.gif" data-src="./images/16.jpeg" alt=""/>
+    <img src="./images/loading.gif" data-src="./images/17.jpeg" alt=""/>
+  </div>
+</body>
+<script>
+  var imgs = document.querySelectorAll('[data-src]')
+
+  var obeserver = new IntersectionObserver((entries)=> {
+    entries.forEach(entry=> {
+      if(entry.isIntersecting) {
+        let target = entry.target;
+        target.src = target.dataset.src;
+        target.load = function() {
+          console.log('加载成功')
+        }
+        target.onerror = function() {
+          // alert('失败')
+        }
+        obeserver.unobserve(target)
+      }
+    })
+  }, { rootMargin: '-200px'})
+
+  for(let i = 0; i < imgs.length; i++) {
+    obeserver.observe(imgs[i])
+  }
+</script>
+</html>

@@ -80,7 +80,7 @@ Webpack
 
 
 
-# 开课吧视频系统性学习计划
+# 系统性学习计划
 react webpack  typescript node    
 <!-- 避免天天使用各种cli搬砖，发布属于自己的CLI -->
 <!-- 自己的脚手架工具 -->

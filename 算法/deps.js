@@ -1,3 +1,4 @@
+// 小题练习
 const deps = {
   "a.js": { deps: ["b.js", "e.js"], },
   "b.js": { deps: ["c.js"], },

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+.box{
+    width: 100px;
+    height: 100px;
+    background-color: red;
+}
+</style>
+<body>
+    <p class="box">iframeChildB</p>
+    <script>
+       window.addEventListener('paste', () => {
+           console.log('我是粘贴事件----childB');
+       });
+    </script>
+</body>
+</html>

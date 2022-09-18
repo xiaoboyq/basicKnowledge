@@ -1,0 +1,5 @@
+<template>
+  <div class="about">
+    <h1>我是child_b</h1>
+  </div>
+</template>
